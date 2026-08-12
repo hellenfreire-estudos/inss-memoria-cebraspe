@@ -1,6 +1,322 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSS Memória CEBRASPE</title>
 
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+header{
+  background:#173f5f;
+  color:white;
+  padding:25px 20px;
+  text-align:center;
+}
+header h1{margin:0 0 8px;font-size:26px}
+header p{margin:0}
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 3px 12px #0001;
+}
+h2{margin-top:0}
+.progress{
+  height:12px;
+  background:#ddd;
+  border-radius:20px;
+  overflow:hidden;
+}
+.progress div{
+  height:100%;
+  width:0%;
+  background:#28a745;
+}
+button{
+  width:100%;
+  padding:15px;
+  margin-top:10px;
+  border:0;
+  border-radius:12px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.primary{background:#173f5f;color:white}
+.option{
+  background:#eef3f8;
+  color:#172033;
+  text-align:left;
+}
+.correct{background:#b9f6c5!important}
+.wrong{background:#ffb8b8!important}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.stat{
+  background:#eef3f8;
+  padding:14px 5px;
+  text-align:center;
+  border-radius:12px;
+}
+.stat strong{
+  display:block;
+  font-size:24px;
+}
+#feedback{
+  font-weight:bold;
+  margin-top:15px;
+}
+.small{
+  color:#687386;
+  font-size:14px;
+}
+</style>
+</head>
 
-renderizar();
+<body>
+
+<header>
+<h1>🧠 INSS Memória CEBRASPE</h1>
+<p>Estude 30 minutos por dia • Aprenda com seus erros</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>🎯 Sua missão de hoje</h2>
+<p>Resolva questões e fortaleça os assuntos em que você mais erra.</p>
+
+<div class="progress">
+<div id="barra"></div>
+</div>
+
+<p id="progresso" class="small">Questão 1 de 5</p>
+</div>
+
+<div class="card stats">
+<div class="stat">
+<strong id="pontos">0</strong>
+Pontos
+</div>
+
+<div class="stat">
+<strong id="acertos">0</strong>
+Acertos
+</div>
+
+<div class="stat">
+<strong id="erros">0</strong>
+Erros
+</div>
+</div>
+
+<div class="card">
+<h2 id="materia">Direito Previdenciário</h2>
+
+<p id="pergunta"></p>
+
+<div id="opcoes"></div>
+
+<div id="feedback"></div>
+
+<button class="primary" id="proxima" onclick="proxima()" style="display:none">
+➡️ Próxima questão
+</button>
+</div>
+
+<div class="card">
+<h2>🧠 Memória Inteligente</h2>
+<p id="memoria">
+Quando você errar, o assunto será marcado para aparecer novamente com maior frequência.
+</p>
+</div>
+
+</div>
+
+<script>
+
+const questoes = [
+
+{
+materia:"Direito Previdenciário",
+pergunta:"A Previdência Social integra a Seguridade Social brasileira.",
+opcoes:["Certo","Errado"],
+resposta:0,
+explicacao:"Certo. A Seguridade Social compreende Saúde, Previdência Social e Assistência Social."
+},
+
+{
+materia:"Direito Previdenciário",
+pergunta:"A Previdência Social possui caráter contributivo.",
+opcoes:["Certo","Errado"],
+resposta:0,
+explicacao:"Certo. A Previdência Social é organizada sob a forma do Regime Geral de Previdência Social e possui caráter contributivo."
+},
+
+{
+materia:"Direito Constitucional",
+pergunta:"A saúde é direito de todos e dever do Estado.",
+opcoes:["Certo","Errado"],
+resposta:0,
+explicacao:"Certo. Essa é uma previsão constitucional fundamental."
+},
+
+{
+materia:"Língua Portuguesa",
+pergunta:"Na prova do CEBRASPE, uma questão errada pode prejudicar a pontuação do candidato.",
+opcoes:["Certo","Errado"],
+resposta:0,
+explicacao:"Certo. No modelo tradicional de julgamento do CEBRASPE, itens errados podem gerar penalização."
+},
+
+{
+materia:"Raciocínio Lógico",
+pergunta:"Se todo servidor é trabalhador e João é servidor, então João é trabalhador.",
+opcoes:["Certo","Errado"],
+resposta:0,
+explicacao:"Certo. Trata-se de uma conclusão lógica válida."
+}
+
+];
+
+let atual=0;
+let pontos=0;
+let acertos=0;
+let erros=0;
+let respondeu=false;
+
+function carregar(){
+
+let q=questoes[atual];
+
+document.getElementById("materia").innerText="📚 "+q.materia;
+
+document.getElementById("pergunta").innerText=q.pergunta;
+
+document.getElementById("progresso").innerText=
+"Questão "+(atual+1)+" de "+questoes.length;
+
+document.getElementById("barra").style.width=
+((atual)/questoes.length*100)+"%";
+
+document.getElementById("feedback").innerText="";
+
+document.getElementById("proxima").style.display="none";
+
+respondeu=false;
+
+let area=document.getElementById("opcoes");
+
+area.innerHTML="";
+
+q.opcoes.forEach((opcao,i)=>{
+
+let botao=document.createElement("button");
+
+botao.innerText=opcao;
+
+botao.className="option";
+
+botao.onclick=()=>responder(i,botao);
+
+area.appendChild(botao);
+
+});
+
+}
+
+function responder(escolha,botao){
+
+if(respondeu)return;
+
+respondeu=true;
+
+let q=questoes[atual];
+
+let botoes=document.querySelectorAll(".option");
+
+botoes.forEach(b=>b.disabled=true);
+
+if(escolha===q.resposta){
+
+botao.classList.add("correct");
+
+acertos++;
+
+pontos+=10;
+
+document.getElementById("feedback").innerText=
+"✅ ACERTOU! +10 pontos\n\n🧠 "+q.explicacao;
+
+}else{
+
+botao.classList.add("wrong");
+
+erros++;
+
+document.getElementById("feedback").innerText=
+"❌ ERROU!\n\n🧠 "+q.explicacao+
+"\n\n🔁 Este assunto será reforçado.";
+
+}
+
+document.getElementById("pontos").innerText=pontos;
+
+document.getElementById("acertos").innerText=acertos;
+
+document.getElementById("erros").innerText=erros;
+
+document.getElementById("proxima").style.display="block";
+
+}
+
+function proxima(){
+
+atual++;
+
+if(atual>=questoes.length){
+
+document.getElementById("materia").innerText="🏆 Missão concluída!";
+
+document.getElementById("pergunta").innerText=
+"Parabéns! Você terminou sua sessão de hoje.";
+
+document.getElementById("opcoes").innerHTML="";
+
+document.getElementById("feedback").innerText=
+"🎯 Pontuação: "+pontos+
+"\n\n✅ Acertos: "+acertos+
+"\n❌ Erros: "+erros+
+"\n\n🧠 Revise principalmente os assuntos que você errou.";
+
+document.getElementById("proxima").style.display="none";
+
+document.getElementById("barra").style.width="100%";
+
+return;
+}
+
+carregar();
+
+}
+
+carregar();
 
 </script>
 
