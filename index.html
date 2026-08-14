@@ -321,6 +321,57 @@ carregar();
 
 carregar();
 
+// 🔔 ALERTAS DE ESTUDO
+const horariosEstudo = [
+  {
+    hora: 8,
+    minuto: 15,
+    mensagem: "🚀 Hora de estudar! Aproveite o trajeto para revisar um pouquinho."
+  },
+  {
+    hora: 12,
+    minuto: 30,
+    mensagem: "📚 Hora do almoço! Que tal fazer uma revisão rápida?"
+  },
+  {
+    hora: 18,
+    minuto: 40,
+    mensagem: "🧠 Hora da volta para casa! Aproveite alguns minutos para estudar."
+  },
+  {
+    hora: 20,
+    minuto: 0,
+    mensagem: "🏋️ Hora da academia! Faça uma pausa e aproveite para revisar."
+  }
+];
+
+function verificarAlertasEstudo() {
+  const agora = new Date();
+  const hora = agora.getHours();
+  const minuto = agora.getMinutes();
+
+  horariosEstudo.forEach((item) => {
+    if (hora === item.hora && minuto === item.minuto) {
+      const hoje =
+        agora.getFullYear() +
+        "-" +
+        (agora.getMonth() + 1) +
+        "-" +
+        agora.getDate();
+
+      const chave = "alerta-" + hoje + "-" + item.hora + "-" + item.minuto;
+
+      if (!localStorage.getItem(chave)) {
+        alert(item.mensagem);
+        localStorage.setItem(chave, "enviado");
+      }
+    }
+  });
+}
+
+setInterval(verificarAlertasEstudo, 30000);
+verificarAlertasEstudo();
+
 </script>
 
 </body>
