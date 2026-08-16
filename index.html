@@ -6,11 +6,12 @@
 <meta name="theme-color" content="#0b1f3a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.json">
 
 <title>INSS Memória NASA 🚀</title>
 
-<link rel="icon" type="image/png" href="IMG_6766.png">
-<link rel="apple-touch-icon" href="IMG_6766.png">
+<link rel="icon" type="image/png" href="nasa-icon.png">
+<link rel="apple-touch-icon" href="nasa-icon.png">
 
 <style>
 :root{
@@ -335,7 +336,7 @@ MISSÃO DE HOJE
 </h2>
 
 <p class="muted">
-Erros aumentam a prioridade do assunto;
+Banco robusto • sem repetição desnecessária • erros voltam para fixação;<br>Erros aumentam a prioridade do assunto;
 acertos consistentes reduzem a frequência.
 </p>
 
@@ -384,7 +385,7 @@ Sequência
 
 <div class="row">
 
-<span id="subject" class="badge"></span>
+<span id="subject" class="badge"></span><span id="sourceBadge" class="badge">NASA AUTORAL</span>
 
 <span id="counter" class="muted"></span>
 
@@ -423,12 +424,10 @@ das próximas questões.
 
 <p class="notice">
 
-Esta implantação inicial usa questões-modelo
-autorais para testar o motor.
+A NASA combina banco autoral com o índice de itens oficiais CEBRASPE disponíveis.
+Questões oficiais com texto integral só entram quando o respectivo caderno oficial é fornecido como fonte de importação.
 
-O conteúdo oficial do edital e um banco amplo
-de questões CEBRASPE serão incorporados
-nas próximas etapas.
+O motor adapta a frequência: erro aumenta prioridade; acerto consistente aumenta intervalo.
 
 </p>
 
@@ -620,712 +619,243 @@ onclick="requestNotifications()">
 </button>
 
 
-<p
-id="notificationStatus"
-class="notice">
-</p>
+<p id="notificationStatus" class="notice"></p>
+
+<div class="card" style="margin-top:12px;background:#f7fbff">
+<h3>⚙️ Configuração do Push</h3>
+<p class="muted">Sem OneSignal. O NASA usa Web Push padrão. Você só precisa colar a URL do pequeno servidor de Push e a chave pública VAPID.</p>
+<label>URL do servidor Push</label>
+<input id="pushApi" placeholder="https://seu-worker.exemplo.workers.dev" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;margin:6px 0 10px">
+<label>Chave pública VAPID</label>
+<input id="pushPublicKey" placeholder="B..." style="width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;margin:6px 0 10px">
+<div class="row">
+<button class="primary" onclick="savePushConfig()">💾 Salvar configuração</button>
+<button class="primary" onclick="nasaPushTest()">🚀 Enviar teste</button>
+</div>
+</div>
 
 
-<p class="notice">
-
-<b>Importante:</b>
-
-esta tela prepara a permissão do navegador,
-mas uma página HTML sozinha não pode garantir
-notificações quando o Safari está totalmente fechado.
-
-Para alertas persistentes no iPhone,
-a próxima etapa é instalar a NASA como PWA
-e configurar o mecanismo de notificações apropriado.
-
-</p>
+<p class="notice"><b>Como funciona:</b> o NASA decide o que revisar; o Web Push apenas entrega a notificação na tela do iPhone. Para receber avisos com o app fechado, o PWA precisa estar instalado na Tela de Início e inscrito no Push.</p>
 
 </div>
 
 </section>
 
-</main>
+<div class="card"><h3>🏛️ Banco CEBRASPE — referência oficial</h3><p class="notice">A NASA separa questões autorais das questões oficiais. O índice oficial mantém prova, item, gabarito quando disponível e fonte oficial. O texto integral das questões da banca deve ser consultado no documento do Cebraspe.</p><p class="notice">A base autoral é estruturada pelo edital de 2022; a prova oficial de 2026 fica separada para não misturar automaticamente conteúdos de períodos distintos.</p></div></main>
 
 
 <script>
-
 /* =========================
-   BANCO INICIAL
-========================= */
-
-const bank = [
-
-{
-s:"Direito Previdenciário",
-
-q:"A Previdência Social integra a Seguridade Social brasileira.",
-
-a:0,
-
-e:"Certo. A Seguridade Social compreende Saúde, Previdência Social e Assistência Social."
-
-},
-
-{
-s:"Direito Previdenciário",
-
-q:"A Assistência Social exige contribuição prévia do beneficiário.",
-
-a:1,
-
-e:"Errado. A Assistência Social independe de contribuição prévia."
-
-},
-
-{
-s:"Língua Portuguesa",
-
-q:"Na frase “Os candidatos estudaram muito”, “muito” exerce função de advérbio.",
-
-a:0,
-
-e:"Certo. “Muito” modifica o verbo e indica intensidade."
-
-},
-
-{
-s:"Direito Constitucional",
-
-q:"Todo direito fundamental é absoluto e nunca pode sofrer limitação.",
-
-a:1,
-
-e:"Errado. Direitos fundamentais podem sofrer limitações nos casos admitidos pelo ordenamento."
-
-},
-
-{
-s:"Direito Administrativo",
-
-q:"Publicidade é um dos princípios expressamente previstos no caput do art. 37 da Constituição.",
-
-a:0,
-
-e:"Certo. O caput do art. 37 traz legalidade, impessoalidade, moralidade, publicidade e eficiência."
-
-},
-
-{
-s:"Língua Portuguesa",
-
-q:"Na oração “Embora estivesse cansada”, há ideia de concessão.",
-
-a:0,
-
-e:"Certo. “Embora” introduz oração subordinada adverbial concessiva."
-
-},
-
-{
-s:"Direito Administrativo",
-
-q:"A Administração Pública pode fazer tudo que a lei não proíbe.",
-
-a:1,
-
-e:"Errado. A Administração está vinculada ao princípio da legalidade."
-
-},
-
-{
-s:"Direito Constitucional",
-
-q:"A Constituição ocupa posição superior às demais normas internas.",
-
-a:0,
-
-e:"Certo. A Constituição é a norma fundamental do ordenamento jurídico."
-
-},
-
-{
-s:"Direito Previdenciário",
-
-q:"A filiação ao RGPS pode decorrer do exercício de atividade abrangida pelo regime.",
-
-a:0,
-
-e:"Certo. A filiação decorre, conforme o caso, do exercício de atividade abrangida pelo RGPS."
-
-}
-
-];
-
-
-/* =========================
-   ESTADO
-========================= */
-
-const subjects = [
-...new Set(bank.map(x=>x.s))
-];
-
-const KEY = "NASA_v2_state";
-
-let st =
-JSON.parse(localStorage.getItem(KEY)||"null")
-||
-{
-total:0,
-hits:0,
-errors:0,
-points:0,
-streak:0,
-best:0,
-subjects:{}
-};
-
-
-subjects.forEach(s=>{
-
-if(!st.subjects[s])
-
-st.subjects[s]=
-{
-hits:0,
-errors:0,
-priority:1
-};
-
-});
-
-
+   NASA — MOTOR ADAPTATIVO
+   Banco externo: questions.json
+   ========================= */
+let bank=[];
+let subjects=[];
 let mission=[];
 let idx=0;
 let answered=false;
-
-
-/* =========================
-   SALVAR
-========================= */
-
-function save(){
-
-localStorage.setItem(
-KEY,
-JSON.stringify(st)
-);
-
-update();
-
-}
-
-
-/* =========================
-   ATUALIZAR
-========================= */
-
-function update(){
-
-points.textContent=st.points;
-
-hits.textContent=st.hits;
-
-errors.textContent=st.errors;
-
-streak.textContent=st.streak;
-
-total.textContent=st.total;
-
-accuracy.textContent=
-st.total
-?
-Math.round(st.hits/st.total*100)+"%"
-:
-"0%";
-
-best.textContent=st.best;
-
-level.textContent=
-Math.max(
-1,
-1+Math.floor(st.points/100)
-);
-
-renderMemory();
-
-}
-
-
-/* =========================
-   MAPA DE MEMÓRIA
-========================= */
-
-function renderMemory(){
-
-memoryGrid.innerHTML=
-
-subjects.map(s=>{
-
-let x=st.subjects[s];
-
-let score=
-Math.max(
-0,
-Math.min(
-100,
-50+x.hits*8-x.errors*12
-)
-);
-
-return `
-
-<div class="topic">
-
-<b>${s}</b>
-
-<div class="meter">
-
-<span
-style="width:${score}%">
-</span>
-
-</div>
-
-<small>
-
-${x.hits} acertos
-•
-${x.errors} erros
-•
-prioridade ${x.priority.toFixed(1)}
-
-</small>
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-
-/* =========================
-   INICIAR MISSÃO
-========================= */
-
-function startMission(){
-
-mission=
-
-[...bank]
-
-.sort(
-
-(a,b)=>
-
-(
-st.subjects[b.s].priority
--
-st.subjects[a.s].priority
-)
-+
-(Math.random()-.5)
-
-)
-
-.slice(0,5);
-
-idx=0;
-
-questionCard.classList.remove("hidden");
-
-renderQuestion();
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-/* =========================
-   MOSTRAR QUESTÃO
-========================= */
-
-function renderQuestion(){
-
-let x=mission[idx];
-
-subject.textContent=x.s;
-
-counter.textContent=
-`Questão ${idx+1} de ${mission.length}`;
-
-question.textContent=x.q;
-
-progress.style.width=
-(idx/mission.length*100)+"%";
-
-feedback.className="hidden";
-
-next.classList.add("hidden");
-
-answered=false;
-
-
-choices.innerHTML=
-
-'<button class="choice" onclick="answer(0,this)">CERTO</button>'+
-'<button class="choice" onclick="answer(1,this)">ERRADO</button>';
-
-}
-
-
-/* =========================
-   RESPONDER
-========================= */
-
-function answer(v,btn){
-
-if(answered)return;
-
-answered=true;
-
-let x=mission[idx];
-
-let ok=v===x.a;
-
-
-document
-.querySelectorAll(".choice")
-.forEach(
-
-(b,n)=>{
-
-if(n===x.a)
-
-b.classList.add("correct");
-
-}
-
-);
-
-
-if(!ok)
-
-btn.classList.add("wrong");
-
-
-st.total++;
-
-
-if(ok){
-
-st.hits++;
-
-st.points+=10;
-
-st.streak++;
-
-st.best=
-Math.max(
-st.best,
-st.streak
-);
-
-st.subjects[x.s].hits++;
-
-st.subjects[x.s].priority=
-Math.max(
-.5,
-st.subjects[x.s].priority-.25
-);
-
-}
-
-else{
-
-st.errors++;
-
-st.points=
-Math.max(
-0,
-st.points-2
-);
-
-st.streak=0;
-
-st.subjects[x.s].errors++;
-
-st.subjects[x.s].priority+=1.25;
-
-}
-
-
-feedback.className="feedback";
-
-
-feedback.innerHTML=
-
-`
-
-<b>
-${ok
-?
-"🎯 ACERTOU!"
-:
-"🧠 ERRO ESTRATÉGICO!"}
-</b>
-
-<br>
-
-${x.e}
-
-<br><br>
-
-${ok
-?
-"Memória consolidada."
-:
-"Este assunto ganhou prioridade para reforço."}
-
-`;
-
-
-next.classList.remove("hidden");
-
-save();
-
-}
-
-
-/* =========================
-   PRÓXIMA
-========================= */
-
-function nextQuestion(){
-
-if(idx<mission.length-1){
-
-idx++;
-
-renderQuestion();
-
-}
-
-else{
-
-progress.style.width="100%";
-
-question.textContent=
-"🚀 MISSÃO CONCLUÍDA!";
-
-choices.innerHTML="";
-
-next.classList.add("hidden");
-
-feedback.className="feedback";
-
-feedback.innerHTML=
-
-`
-
-Missão concluída.
-
-Total acumulado:
-
-<b>${st.hits} acertos</b>
-
-e
-
-<b>${st.errors} erros</b>.
-
-`;
-
-save();
-
-}
-
-}
-
-
-/* =========================
-   ABAS
-========================= */
-
-function tab(id,btn){
-
-document
-.querySelectorAll(".page")
-.forEach(
-x=>x.classList.add("hidden")
-);
-
-document
-.getElementById(id)
-.classList.remove("hidden");
-
-document
-.querySelectorAll(".tab")
-.forEach(
-x=>x.classList.remove("active")
-);
-
-btn.classList.add("active");
-
-}
-
-
-/* =========================
-   NOTIFICAÇÕES
-========================= */
-
-async function requestNotifications(){
-
-const out=
-document.getElementById(
-"notificationStatus"
-);
-
-
-if(!("Notification" in window)){
-
-out.textContent=
-"Este navegador não disponibiliza a API de notificações nesta página.";
-
-return;
-
-}
-
-
-try{
-
-let p=
-await Notification.requestPermission();
-
-
-out.textContent=
-
-p==="granted"
-
-?
-
-"✅ Permissão concedida neste navegador. Para notificações persistentes no iPhone, continuaremos com a instalação PWA e a configuração adequada."
-
-:
-
-"⚠️ Permissão não concedida.";
-
-}
-
-catch(e){
-
-out.textContent=
-"Não foi possível solicitar a permissão neste momento.";
-
-}
-
-}
-
-
-/* =========================
-   CRONÔMETRO
-========================= */
-
+let timerId=null;
 let secs=1800;
 
-let timerId=null;
+const KEY="NASA_v3_state";
+let st=JSON.parse(localStorage.getItem(KEY)||"null")||{
+  total:0,hits:0,errors:0,points:0,streak:0,best:0,
+  subjects:{},history:{}
+};
 
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(st));
+  update();
+}
+
+function ensureSubject(s){
+  if(!st.subjects[s]) st.subjects[s]={hits:0,errors:0,priority:1};
+}
+
+function daysSince(ts){
+  return ts ? (Date.now()-ts)/86400000 : 999;
+}
+
+function priorityScore(q){
+  const h=st.history[q.id]||{wrong:0,right:0,last:0,interval:0};
+  const days=daysSince(h.last);
+  let score=(h.wrong*8)+(q.peso_prioridade||1.5);
+  if(!h.last) score+=4;
+  if(days>=Math.max(1,h.interval||1)) score+=Math.min(days,14);
+  else score-=5;
+  score-=Math.min(h.right||0,5);
+  return score;
+}
+
+function buildMission(){
+  if(!bank.length) return;
+  mission=[...bank]
+    .sort((a,b)=>priorityScore(b)-priorityScore(a) || Math.random()-.5)
+    .slice(0,5);
+  idx=0;
+  answered=false;
+}
+
+function startMission(){
+  buildMission();
+  questionCard.classList.remove("hidden");
+  renderQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderQuestion(){
+  if(!mission.length) return;
+  const x=mission[idx];
+  subject.textContent=x.disciplina;
+  counter.textContent=`Questão ${idx+1} de ${mission.length}`;
+  sourceBadge.textContent="NASA AUTORAL";
+  question.textContent=x.enunciado;
+  progress.style.width=(idx/mission.length*100)+"%";
+  feedback.className="hidden";
+  next.classList.add("hidden");
+  answered=false;
+  choices.innerHTML='<button class="choice" onclick="answer(\'C\',this)">CERTO</button>'+
+                    '<button class="choice" onclick="answer(\'E\',this)">ERRADO</button>';
+}
+
+function answer(v,btn){
+  if(answered) return;
+  answered=true;
+  const x=mission[idx];
+  const ok=v===x.gabarito;
+  const h=st.history[x.id]||{wrong:0,right:0,last:0,interval:0};
+
+  document.querySelectorAll(".choice").forEach((b,n)=>{
+    if((n===0?"C":"E")===x.gabarito) b.classList.add("correct");
+  });
+  if(!ok) btn.classList.add("wrong");
+
+  st.total++;
+  ensureSubject(x.disciplina);
+  h.last=Date.now();
+
+  if(ok){
+    st.hits++; st.points+=10; st.streak++;
+    st.best=Math.max(st.best,st.streak);
+    st.subjects[x.disciplina].hits++;
+    st.subjects[x.disciplina].priority=Math.max(.5,st.subjects[x.disciplina].priority-.25);
+    h.right=(h.right||0)+1;
+    h.interval=Math.min(30,Math.max(2,(h.interval||1)*1.8));
+  }else{
+    st.errors++; st.points=Math.max(0,st.points-2); st.streak=0;
+    st.subjects[x.disciplina].errors++;
+    st.subjects[x.disciplina].priority+=1.25;
+    h.wrong=(h.wrong||0)+1;
+    h.interval=1;
+    if(typeof nasaScheduleErrorReview==="function") nasaScheduleErrorReview(x);
+  }
+
+  st.history[x.id]=h;
+  feedback.className="feedback";
+  feedback.innerHTML=`<b>${ok?"🎯 ACERTOU!":"🧠 ERRO ESTRATÉGICO!"}</b><br>${x.explicacao}<br><br><span class="notice">${ok?"Memória consolidada; intervalo ampliado.":"Assunto e questão priorizados para recuperação."}</span>`;
+  next.classList.remove("hidden");
+  save();
+}
+
+function nextQuestion(){
+  if(idx<mission.length-1){idx++;renderQuestion();return;}
+  progress.style.width="100%";
+  question.textContent="🚀 MISSÃO CONCLUÍDA!";
+  choices.innerHTML="";
+  next.classList.add("hidden");
+  feedback.className="feedback";
+  feedback.innerHTML=`Missão concluída. <b>${st.hits} acertos</b> e <b>${st.errors} erros</b> acumulados.`;
+  save();
+}
+
+function update(){
+  points.textContent=st.points;
+  hits.textContent=st.hits;
+  errors.textContent=st.errors;
+  streak.textContent=st.streak;
+  total.textContent=st.total;
+  accuracy.textContent=st.total?Math.round(st.hits/st.total*100)+"%":"0%";
+  best.textContent=st.best;
+  level.textContent=Math.max(1,1+Math.floor(st.points/100));
+  renderMemory();
+}
+
+function renderMemory(){
+  memoryGrid.innerHTML=subjects.map(s=>{
+    ensureSubject(s);
+    const x=st.subjects[s];
+    const score=Math.max(0,Math.min(100,50+x.hits*8-x.errors*12));
+    return `<div class="topic"><b>${s}</b><div class="meter"><span style="width:${score}%"></span></div><small>${x.hits} acertos • ${x.errors} erros • prioridade ${x.priority.toFixed(1)}</small></div>`;
+  }).join("");
+}
+
+function tab(id,btn){
+  document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+async function requestNotifications(){
+  const out=document.getElementById("notificationStatus");
+  if(!("Notification" in window)){out.textContent="Este navegador não disponibiliza a API de notificações nesta página.";return;}
+  try{
+    const p=await Notification.requestPermission();
+    out.textContent=p==="granted"?"✅ Permissão concedida neste navegador.":"⚠️ Permissão não concedida.";
+  }catch(e){out.textContent="Não foi possível solicitar a permissão neste momento.";}
+}
 
 function draw(){
-
-timer.textContent=
-
-String(
-Math.floor(secs/60)
-).padStart(2,"0")
-
-+
-
-":"
-
-+
-
-String(
-secs%60
-).padStart(2,"0");
-
+  timer.textContent=String(Math.floor(secs/60)).padStart(2,"0")+":"+String(secs%60).padStart(2,"0");
 }
-
-
 function toggleTimer(){
+  if(timerId){clearInterval(timerId);timerId=null;timerBtn.textContent="Continuar";return;}
+  timerBtn.textContent="Pausar";
+  timerId=setInterval(()=>{if(secs<=0){clearInterval(timerId);timerId=null;timerBtn.textContent="Concluído 🎯";return;}secs--;draw();},1000);
+}
+function resetTimer(){clearInterval(timerId);timerId=null;secs=1800;draw();timerBtn.textContent="Iniciar";}
 
-if(timerId){
-
-clearInterval(timerId);
-
-timerId=null;
-
-timerBtn.textContent=
-"Continuar";
-
-return;
-
+function saveSlots(){
+  ["s1","s2","s3","s4"].forEach(x=>localStorage.setItem("nasa_"+x,document.getElementById(x).value));
+  document.getElementById("saved").textContent="Horários salvos neste aparelho.";
+  if(typeof nasaScheduleFixedTimes==="function") nasaScheduleFixedTimes();
 }
 
+async function init(){
+  ["s1","s2","s3","s4"].forEach(x=>{let v=localStorage.getItem("nasa_"+x);if(v)document.getElementById(x).value=v;});
+  try{
+    const r=await fetch("questions.json",{cache:"no-store"});
+    bank=await r.json();
+    subjects=[...new Set(bank.map(x=>x.disciplina))];
+    subjects.forEach(ensureSubject);
+    buildMission();
+    update();
+    draw();
+  }catch(e){
+    question.textContent="Não foi possível carregar o banco de questões. Verifique se questions.json foi publicado junto com o index.html.";
+    draw();
+  }
+  if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+  loadPushConfig();
+}
+init();
 
-timerBtn.textContent=
-"Pausar";
-
-
-timerId=
-
-setInterval(()=>{
-
-if(secs<=0){
-
-clearInterval(timerId);
-
-timerId=null;
-
-timerBtn.textContent=
-"Concluído 🎯";
-
-return;
-
+function savePushConfig(){
+  localStorage.setItem('NASA_PUSH_API',document.getElementById('pushApi').value.trim());
+  localStorage.setItem('NASA_VAPID_PUBLIC_KEY',document.getElementById('pushPublicKey').value.trim());
+  document.getElementById('notificationStatus').textContent='✅ Configuração salva. Agora toque em “Ativar notificações neste aparelho”.';
+}
+function loadPushConfig(){
+  document.getElementById('pushApi').value=localStorage.getItem('NASA_PUSH_API')||'';
+  document.getElementById('pushPublicKey').value=localStorage.getItem('NASA_VAPID_PUBLIC_KEY')||'';
 }
 
-secs--;
-
-draw();
-
-},1000);
-
+</script>
+<script src="push-client.js"></script>
+<script>
+function requestNotifications(){
+  nasaPushSubscribe();
 }
-
-
-function resetTimer(){
-
-clearInterval(timerId);
-
-timerId=null;
-
-secs=1800;
-
-draw();
-
-timerBtn.textContent=
-"Iniciar";
-
-}
-
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-update();
-
-draw();
-
 </script>
 
 </body>

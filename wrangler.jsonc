@@ -1,0 +1,10 @@
+{
+  "name": "inss-memoria-nasa-push",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-16",
+  "compatibility_flags": ["nodejs_compat"],
+  "kv_namespaces": [
+    { "binding": "NASA_KV", "id": "COLE_AQUI_O_ID_DA_KV" }
+  ],
+  "triggers": { "crons": ["* * * * *"] }
+}

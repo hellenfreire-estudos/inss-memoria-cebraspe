@@ -1,0 +1,7 @@
+{
+  "name":"inss-memoria-nasa-push-server",
+  "private":true,
+  "type":"module",
+  "dependencies":{"@cloudflare/workers-types":"latest","web-push-neo":"latest"},
+  "devDependencies":{"wrangler":"latest"}
+}
