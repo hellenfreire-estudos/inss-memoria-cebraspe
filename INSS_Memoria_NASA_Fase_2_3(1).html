@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07182d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="INSS Memória NASA">
+<title>🚀 INSS Memória NASA</title>
+<style>
+:root{--n:#07182d;--b:#1769aa;--c:#00a8cc;--bg:#eef3f8;--card:#fff;--t:#122033;--m:#687789;--ok:#16834b;--bad:#c62828;--g:#f5b700;--l:#dbe3ec}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit;border:0;cursor:pointer}.header{background:linear-gradient(135deg,var(--n),var(--b));color:#fff;text-align:center;padding:24px 16px}.header h1{margin:0;font-size:27px}.header p{margin:7px 0 0}
+.wrap{max-width:760px;margin:auto;padding:14px 14px 100px}.card{background:var(--card);border:1px solid var(--l);border-radius:18px;padding:17px;margin:12px 0;box-shadow:0 7px 20px #07182d12}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{text-align:center;padding:10px 4px;border:1px solid var(--l);border-radius:14px;background:#fff}.stat b{display:block;font-size:20px}.stat span{font-size:11px;color:var(--m)}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#e8f3fb;color:var(--b);font-size:11px;font-weight:800;margin:2px}.author{background:#e8f6ee;color:var(--ok)}.official{background:#fff4cf;color:#765900}
+.progress{height:9px;background:#dce5ee;border-radius:20px;overflow:hidden;margin:10px 0}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c),var(--b))}
+h2{font-size:20px;margin:5px 0 9px}.muted,.source{color:var(--m)}.small{font-size:12px;line-height:1.45}.q{font-size:18px;line-height:1.45;font-weight:650;margin:16px 0}.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{padding:15px;border:2px solid var(--l);border-radius:14px;background:#f4f7fa;font-weight:800}.choice.correct{border-color:var(--ok);background:#e8f6ee}.choice.wrong{border-color:var(--bad);background:#fdecec}
+.explain{margin-top:12px;padding:12px;border-left:4px solid var(--b);background:#f6f8fb;border-radius:10px;line-height:1.45}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:12px 15px;border-radius:12px;background:var(--b);color:#fff;font-weight:800}.btn.alt{background:#e8eef5;color:var(--n)}.btn.gold{background:var(--g);color:#241d00}.btn.danger{background:var(--bad)}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--l);display:flex;justify-content:center;gap:2px;padding:7px 2px calc(7px + env(safe-area-inset-bottom));z-index:5}.nav button{background:transparent;color:var(--m);padding:6px 9px;border-radius:10px;font-size:11px}.nav button.active{color:var(--b);background:#edf6fc;font-weight:800}
+.hidden{display:none!important}.topic{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--l)}.bar{width:105px;height:8px;background:#e1e8ef;border-radius:10px;overflow:hidden}.bar i{display:block;height:100%;background:var(--b)}.link{color:var(--b);font-weight:750;text-decoration:none}.alert{padding:11px;background:#fff8df;border-radius:12px;color:#654d00;font-size:13px}
+@media(max-width:430px){.stats{grid-template-columns:repeat(2,1fr)}.choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header"><h1>🚀 INSS Memória NASA</h1><p>Missão aprovação • 30 minutos • CEBRASPE • revisão inteligente</p></header>
+<main class="wrap">
+
+<section id="home">
+<div class="stats">
+<div class="stat"><b id="score">0</b><span>Pontos</span></div><div class="stat"><b id="correct">0</b><span>Acertos</span></div>
+<div class="stat"><b id="total">0</b><span>Respondidas</span></div><div class="stat"><b id="streak">0</b><span>Sequência</span></div>
+</div>
+<div class="card">
+<span class="badge">🧠 MISSÃO ADAPTATIVA</span><h2>Atacar o que você mais precisa.</h2>
+<p class="muted">Errou um tema? Ele ganha prioridade. Dominou? A frequência diminui.</p>
+<div class="progress"><i id="missionProgress"></i></div><p><b id="missionText">0/12 questões da missão</b></p>
+<div class="btnrow"><button class="btn" onclick="start()">🚀 Iniciar missão</button><button class="btn alt" onclick="show('dash')">📊 Desempenho</button></div>
+<div class="alert">Padrão CEBRASPE: julgue cada item como <b>Certo (C)</b> ou <b>Errado (E)</b>.</div>
+</div>
+<div class="card"><h3>📚 Banco robusto</h3>
+<p class="small">Esta versão traz <b>itens autorais no padrão CEBRASPE</b> e separa as fontes oficiais para consulta. Não reproduzimos integralmente questões protegidas; o texto original deve ser conferido nos cadernos oficiais.</p>
+<a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/ED_1_INSS_22_ABERTURA.PDF">📄 Edital oficial INSS/CEBRASPE</a><br><br>
+<a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/1491CB8F34C7698D6813AEDFC36196C9ED25F9ED2CD0FDEF7BF3442605FBFFA5.pdf">📘 Caderno oficial CEBRASPE</a>
+</div>
+</section>
+
+<section id="mission" class="hidden"><div class="card">
+<div id="meta"></div><div class="progress"><i id="qprogress"></i></div><div class="q" id="question"></div>
+<div class="choices"><button class="choice" id="C" onclick="answer('C')">✅ CERTO</button><button class="choice" id="E" onclick="answer('E')">❌ ERRADO</button></div>
+<div id="feedback"></div><div class="btnrow" style="margin-top:12px"><button class="btn alt" onclick="show('home')">⏸ Pausar</button><button id="next" class="btn gold hidden" onclick="next()">Próximo ➜</button></div>
+</div></section>
+
+<section id="dash" class="hidden"><div class="card"><h2>📊 Painel NASA</h2><p class="muted">Prioridade calculada pelo seu histórico local.</p><div id="topics"></div></div>
+<div class="card"><h3>🧠 Motor adaptativo</h3><p class="small">Erros recentes pesam mais; acertos consistentes reduzem a prioridade. Isso organiza sua revisão — não é uma previsão de prova.</p><button class="btn danger" onclick="resetData()">Zerar histórico</button></div></section>
+
+<section id="bank" class="hidden"><div class="card"><h2>📚 Banco</h2><p class="muted">Itens autorais para treino C/E.</p><div id="bankList"></div></div></section>
+
+<section id="sources" class="hidden"><div class="card"><h2>🔎 Fontes oficiais</h2>
+<p><a class="link" target="_blank" href="https://www.cebraspe.org.br/o-que-fazemos/concurso/">CEBRASPE — concursos</a></p>
+<p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/ED_1_INSS_22_ABERTURA.PDF">Edital INSS 2022</a></p>
+<p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/1491CB8F34C7698D6813AEDFC36196C9ED25F9ED2CD0FDEF7BF3442605FBFFA5.pdf">Caderno oficial</a></p>
+<p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/inss_22/arquivos/INSS_22_EXCETO_GEX_GUARULHOS_JUSTIFICATIVAS_DE_ALTERAES_DE_GABARITO.PDF">Justificativas de alterações/anulações</a></p>
+<p class="small muted">O conteúdo deve ser atualizado quando houver novo edital.</p></div></section>
+</main>
+
+<nav class="nav"><button id="n0" class="active" onclick="show('home')">🏠<br>Início</button><button id="n1" onclick="start()">🚀<br>Missão</button><button id="n2" onclick="show('dash')">📊<br>Desempenho</button><button id="n3" onclick="show('bank')">📚<br>Banco</button><button id="n4" onclick="show('sources')">🔎<br>Fontes</button></nav>
+
+<script>
+const Q=[
+["Direito Previdenciário","A seguridade social compreende saúde, previdência social e assistência social.","C","É a estrutura constitucional da seguridade social."],
+["Direito Previdenciário","No RGPS, a filiação é facultativa para todos os trabalhadores que exercem atividade remunerada.","E","Quem se enquadra como segurado obrigatório tem filiação obrigatória; facultativo é outra categoria."],
+["Direito Previdenciário","O salário-maternidade integra, em regra, os benefícios do RGPS.","C","É benefício previsto na legislação previdenciária."],
+["Direito Previdenciário","O auxílio-reclusão é pago ao segurado preso, independentemente dos requisitos legais.","E","A proteção é destinada aos dependentes do segurado de baixa renda, observados os requisitos."],
+["Direito Previdenciário","A assistência social é prestada a quem dela necessitar, independentemente de contribuição.","C","A assistência social é política de seguridade de caráter não contributivo."],
+["Direito Previdenciário","A saúde depende de contribuição prévia do usuário para ser assegurada pelo Estado.","E","Saúde é direito de todos e dever do Estado; não depende de contribuição prévia."],
+["Direito Constitucional","Legalidade, impessoalidade, moralidade, publicidade e eficiência estão expressamente no art. 37 da Constituição.","C","São os cinco princípios do caput do art. 37."],
+["Direito Constitucional","A administração pode agir contra a lei se entender que o resultado atende melhor ao interesse público.","E","A finalidade pública não autoriza violar a legalidade."],
+["Direito Administrativo","Anulação está ligada à ilegalidade; revogação, em regra, à conveniência e oportunidade.","C","Essa é a distinção clássica entre os institutos."],
+["Direito Administrativo","Todo ato administrativo ilegal deve ser revogado pela própria administração.","E","Ilegalidade conduz à anulação; revogação trata do mérito."],
+["Língua Portuguesa","Clareza, precisão, objetividade e concisão são características desejáveis da redação oficial.","C","A comunicação oficial deve evitar ambiguidades e excessos."],
+["Língua Portuguesa","Uma informação não autorizada pelo texto pode ser considerada correta apenas por ser compatível com conhecimento externo.","E","A interpretação deve respeitar o texto e o comando."],
+["Informática","Phishing pode usar mensagens ou páginas falsas para induzir o usuário a entregar dados.","C","É uma forma comum de fraude por engenharia social."],
+["Informática","HTTPS, sozinho, garante que um site é legítimo e elimina qualquer risco de fraude.","E","HTTPS protege a comunicação, mas não prova a legitimidade do site."],
+["Ética no Serviço Público","O servidor deve orientar sua atuação pelo interesse público e pelos deveres funcionais.","C","A atuação pública é vinculada a princípios e deveres."],
+["Ética no Serviço Público","A finalidade pública autoriza o servidor a ignorar regras de conduta quando acredita que o resultado será melhor.","E","Interesse público não autoriza descumprir normas."],
+["Direito Previdenciário","O RGPS possui caráter contributivo e filiação obrigatória, observadas as hipóteses legais.","C","É característica central do regime."],
+["Direito Previdenciário","O segurado facultativo pode filiar-se sem atender aos requisitos legais dessa modalidade.","E","A filiação facultativa também depende de requisitos legais."],
+["Direito Previdenciário","A pensão por morte protege dependentes do segurado, conforme os requisitos legais.","C","É benefício voltado à proteção dos dependentes."],
+["Direito Previdenciário","A qualidade de segurado é irrelevante para qualquer benefício do RGPS.","E","Ela é relevante para diversos benefícios, ressalvadas as hipóteses legais."],
+["INSS e Atendimento","As atividades do Técnico do Seguro Social incluem ações relacionadas ao reconhecimento de direitos previdenciários.","C","Essa atribuição consta da descrição do cargo no edital de 2022."],
+["INSS e Atendimento","O atendimento digital elimina a necessidade de observar regras administrativas do INSS.","E","Canal digital não afasta requisitos e procedimentos."],
+["Raciocínio Lógico","A negação de 'todos os servidores estudam' é 'nenhum servidor estuda'.","E","A negação é: existe pelo menos um servidor que não estuda."],
+["Raciocínio Lógico","A proposição 'se A, então B' é falsa somente quando A é verdadeira e B é falsa.","C","Essa é a condição de falsidade da implicação material."]
+];
+
+let S=JSON.parse(localStorage.getItem("nasaINSS")||"null")||{score:0,correct:0,total:0,streak:0,done:0,hist:{},session:[],pos:0};
+const save=()=>{localStorage.setItem("nasaINSS",JSON.stringify(S));stats()};
+function stats(){score.textContent=S.score;correct.textContent=S.correct;total.textContent=S.total;streak.textContent=S.streak;missionText.textContent=S.done+"/12 questões da missão";missionProgress.style.width=Math.min(12,S.done)/12*100+"%"}
+function show(id){document.querySelectorAll("main section").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));let m={home:"n0",mission:"n1",dash:"n2",bank:"n3",sources:"n4"};if(m[id])document.getElementById(m[id]).classList.add("active");if(id==="dash")renderDash();if(id==="bank")renderBank();scrollTo(0,0)}
+function pri(i){let h=S.hist[i]||{c:0,e:0,last:0},a=h.c+h.e,acc=a?h.c/a:0,days=h.last?(Date.now()-h.last)/86400000:99;return h.e*5+(1-acc)*3+Math.min(days,6)*.35+(a?0:4)}
+function start(){let a=Q.map((q,i)=>({q,i,p:pri(i)})).sort((x,y)=>y.p-x.p),out=[],topics=new Set();while(out.length<12&&a.length){let k=a.findIndex(x=>!topics.has(x.q[0]));if(k<0)k=0;let x=a.splice(k,1)[0];out.push(x.i);topics.add(x.q[0])}while(out.length<12&&a.length)out.push(a.shift().i);S.session=out;S.pos=0;show("mission");renderQ()}
+function renderQ(){let i=S.session[S.pos],q=Q[i];meta.innerHTML='<span class="badge">Questão '+(S.pos+1)+'/12</span><span class="badge author">AUTORAL • CEBRASPE</span><span class="badge">'+q[0]+'</span>';qprogress.style.width=S.pos/12*100+"%";question.textContent=q[1];feedback.innerHTML="";C.className=E.className="choice";C.disabled=E.disabled=false;next.classList.add("hidden")}
+function answer(a){let i=S.session[S.pos],q=Q[i],ok=a===q[2],h=S.hist[i]||{c:0,e:0,last:0};h[ok?"c":"e"]++;h.last=Date.now();S.hist[i]=h;S.total++;ok?(S.correct++,S.score++,S.streak++):(S.score--,S.streak=0);S.done=Math.min(12,S.done+1);save();document.getElementById(a).classList.add(ok?"correct":"wrong");C.disabled=E.disabled=true;feedback.innerHTML='<div class="explain"><b>'+(ok?"🎯 ACERTOU!":"🧠 ERROU — o sistema vai reforçar este tema.")+'</b><br>'+q[3]+'<br><span class="small">Gabarito: <b>'+q[2]+'</b></span></div>';next.classList.remove("hidden")}
+function next(){if(S.pos>=11){question.textContent="🏆 Missão concluída!";meta.innerHTML='<span class="badge">NASA COMPLETA</span>';document.querySelector(".choices").innerHTML="";feedback.innerHTML='<div class="explain"><b>12 questões concluídas.</b><br>Abra o painel para ver os temas que precisam de reforço.</div>';next.classList.add("hidden");qprogress.style.width="100%";return}S.pos++;renderQ()}
+function renderDash(){let d={};Q.forEach((q,i)=>{d[q[0]]??={c:0,e:0};let h=S.hist[i];if(h){d[q[0]].c+=h.c;d[q[0]].e+=h.e}});topics.innerHTML=Object.entries(d).sort((a,b)=>(b[1].e-b[1].c)-(a[1].e-a[1].c)).map(([t,x])=>{let a=x.c+x.e,p=a?Math.round(x.c/a*100):0;return '<div class="topic"><div><b>'+t+'</b><div class="small muted">'+a+' respostas • '+p+'% de acerto</div></div><div class="bar"><i style="width:'+p+'%"></i></div></div>'}).join("")}
+function renderBank(){bankList.innerHTML=Q.map((q,i)=>'<div class="topic"><div><span class="badge author">AUTORAL</span> <b>'+q[0]+'</b><div class="small">'+q[1]+'</div><div class="small muted">Gabarito: '+q[2]+'</div></div></div>').join("")}
+function resetData(){if(confirm("Zerar o histórico deste aparelho?")){localStorage.removeItem("nasaINSS");location.reload()}}
+stats();
+</script>
+</body></html>
