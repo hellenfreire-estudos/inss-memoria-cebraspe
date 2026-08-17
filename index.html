@@ -1,17 +1,2601 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07182d"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="INSS Memória NASA"><title>🚀 INSS Memória NASA</title><link rel="icon" type="image/png" href="nasa-icon.png"><link rel="apple-touch-icon" href="nasa-icon.png"><style>
-:root{--n:#07182d;--b:#1769aa;--c:#00a8cc;--bg:#eef3f8;--card:#fff;--t:#122033;--m:#687789;--ok:#16834b;--bad:#c62828;--g:#f5b700;--l:#dbe3ec}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:92px}button{font:inherit;border:0;cursor:pointer}.header{background:linear-gradient(135deg,var(--n),var(--b));color:#fff;text-align:center;padding:24px 16px}.header h1{margin:0;font-size:27px}.header p{margin:7px 0 0}.wrap{max-width:760px;margin:auto;padding:14px}.card{background:#fff;border:1px solid var(--l);border-radius:18px;padding:17px;margin:12px 0;box-shadow:0 7px 20px #07182d12}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{text-align:center;padding:10px 4px;border:1px solid var(--l);border-radius:14px;background:#fff}.stat b{display:block;font-size:20px}.stat span{font-size:11px;color:var(--m)}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#e8f3fb;color:var(--b);font-size:11px;font-weight:800;margin:2px}.author,.mastered{background:#e8f6ee;color:var(--ok)}.due{background:#fff4cf;color:#765900}.progress{height:9px;background:#dce5ee;border-radius:20px;overflow:hidden;margin:10px 0}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c),var(--b));transition:.25s}h2{font-size:20px;margin:5px 0 9px}.muted{color:var(--m)}.small{font-size:12px;line-height:1.45}.q{font-size:18px;line-height:1.45;font-weight:650;margin:16px 0}.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{padding:15px;border:2px solid var(--l);border-radius:14px;background:#f4f7fa;font-weight:800}.choice.correct{border-color:var(--ok);background:#e8f6ee}.choice.wrong{border-color:var(--bad);background:#fdecec}.explain{margin-top:12px;padding:12px;border-left:4px solid var(--b);background:#f6f8fb;border-radius:10px;line-height:1.45}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:12px 15px;border-radius:12px;background:var(--b);color:#fff;font-weight:800}.alt{background:#e8eef5;color:var(--n)}.gold{background:var(--g);color:#241d00}.danger{background:var(--bad)}.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--l);display:flex;justify-content:center;gap:2px;padding:7px 2px calc(7px + env(safe-area-inset-bottom));z-index:5}.nav button{background:transparent;color:var(--m);padding:6px 9px;border-radius:10px;font-size:11px}.nav button.active{color:var(--b);background:#edf6fc;font-weight:800}.hidden{display:none!important}.topic{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--l)}.meter{height:8px;background:#e2e9ef;border-radius:8px;overflow:hidden;margin:7px 0}.meter i{display:block;height:100%;background:var(--c)}.timer{text-align:center;font-size:34px;font-weight:900;margin:7px}.select{width:100%;padding:11px;border:1px solid var(--l);border-radius:12px;background:#fff;color:var(--t)}@media(max-width:430px){.stats{grid-template-columns:repeat(2,1fr)}.choices{grid-template-columns:1fr}}
-</style></head><body><header class="header"><h1>🚀 INSS Memória NASA</h1><p>Missão aprovação • 30 minutos • CEBRASPE • revisão inteligente</p></header><main class="wrap">
-<section id="home"><div class="stats"><div class="stat"><b id="score">0</b><span>Pontos</span></div><div class="stat"><b id="correct">0</b><span>Acertos</span></div><div class="stat"><b id="total">0</b><span>Respondidas</span></div><div class="stat"><b id="streak">0</b><span>Sequência</span></div></div><div class="card"><span class="badge">🧠 MISSÃO ADAPTATIVA</span><h2>Atacar o que você mais precisa.</h2><p class="muted">Errou um tema? Ele ganha prioridade. Dominou? A frequência diminui.</p><div class="progress"><i id="missionProgress"></i></div><p><b id="missionText">0/12 questões da missão</b></p><div class="btnrow"><button class="btn" onclick="start()">🚀 Iniciar missão</button><button class="btn alt" onclick="show('dash')">📊 Desempenho</button></div><div class="alert" style="padding:11px;background:#fff8df;border-radius:12px;color:#654d00;font-size:13px">Padrão CEBRASPE: julgue cada item como <b>Certo (C)</b> ou <b>Errado (E)</b>.</div></div><div class="card"><h3>📚 Banco robusto</h3><p class="small">Esta versão traz <b>300 itens autorais classificados</b> no padrão CEBRASPE e separa as fontes oficiais para consulta. Não reproduzimos integralmente questões protegidas; o texto original deve ser conferido nos cadernos oficiais.</p><p class="small"><b>Motor NASA:</b> adaptação por desempenho + repetição espaçada + seleção inteligente + recuperação ativa + interleaving.</p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/ED_1_INSS_22_ABERTURA.PDF">📄 Edital oficial INSS/CEBRASPE</a><br><br><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/1491CB8F34C7698D6813AEDFC36196C9ED25F9ED2CD0FDEF7BF3442605FBFFA5.pdf">📘 Caderno oficial CEBRASPE</a></div></section>
-<section id="mission" class="hidden"><div class="card"><div id="meta"></div><div class="progress"><i id="qprogress"></i></div><div class="q" id="question"></div><div id="choices" class="choices"><button class="choice" id="C" onclick="answer('C')">✅ CERTO</button><button class="choice" id="E" onclick="answer('E')">❌ ERRADO</button></div><div id="feedback"></div><div class="btnrow" style="margin-top:12px"><button class="btn alt" onclick="show('home')">⏸ Pausar</button><button id="next" class="btn gold hidden" onclick="next()">Próximo ➜</button></div></div></section>
-<section id="dash" class="hidden"><div class="card"><h2>📊 Painel NASA</h2><p class="muted">O painel transforma seu histórico em prioridade de estudo.</p><div class="stats"><div class="stat"><b id="accuracy">0%</b><span>Precisão</span></div><div class="stat"><b id="best">0</b><span>Melhor sequência</span></div><div class="stat"><b id="level">1</b><span>Nível</span></div><div class="stat"><b id="dueCount">0</b><span>Revisões vencidas</span></div></div></div><div class="card"><h3>🧠 Mapa de domínio</h3><div id="topics"></div></div><div class="card"><h3>🔄 Repetição espaçada real</h3><p id="reviewSummary" class="small muted">O motor calcula a próxima revisão de cada item.</p><div id="dueList"></div></div><div class="card"><h3>🎯 Próximas questões mais inteligentes</h3><p class="small muted">A seleção considera revisões vencidas, erros, baixa precisão, dificuldade, novidade controlada, tempo desde o último contato e equilíbrio entre disciplinas.</p><div id="selection"></div></div><div class="card"><h3>⏱️ Sprint de 30 minutos</h3><div id="timer" class="timer">30:00</div><div class="btnrow"><button id="timerBtn" class="btn" onclick="toggleTimer()">Iniciar</button><button class="btn alt" onclick="resetTimer()">Reiniciar</button></div></div><div class="card"><h3>🧠 Metodologia neurocognitiva NASA</h3><p class="small"><b>1. Recuperação ativa:</b> decidir C/E antes da resposta.</p><p class="small"><b>2. Feedback imediato:</b> gabarito e explicação logo após a decisão.</p><p class="small"><b>3. Dificuldade desejável:</b> erros voltam em intervalos menores.</p><p class="small"><b>4. Interleaving:</b> mistura de disciplinas para evitar treino mecânico.</p><p class="small"><b>5. Metacognição:</b> cada resposta atualiza domínio, prioridade e próxima revisão.</p></div><div class="card"><h3>⚙️ Controle do histórico</h3><p class="small muted">O histórico fica salvo neste aparelho.</p><button class="btn danger" onclick="resetData()">Zerar histórico</button></div></section>
-<section id="bank" class="hidden"><div class="card"><h2>📚 Banco classificado</h2><p class="muted">300 itens autorais. Use os filtros para enxergar a estrutura.</p><select id="subjectFilter" class="select" onchange="renderBank()"></select><div id="bankList"></div></div></section>
-<section id="sources" class="hidden"><div class="card"><h2>🔎 Fontes oficiais</h2><p><a class="link" target="_blank" href="https://www.cebraspe.org.br/o-que-fazemos/concurso/">CEBRASPE — concursos</a></p><p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/ED_1_INSS_22_ABERTURA.PDF">Edital INSS 2022</a></p><p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/1491CB8F34C7698D6813AEDFC36196C9ED25F9ED2CD0FDEF7BF3442605FBFFA5.pdf">Caderno oficial</a></p><p class="small muted">O conteúdo deve ser atualizado quando houver novo edital.</p></div></section></main>
-<nav class="nav"><button id="n0" class="active" onclick="show('home')">🏠<br>Início</button><button id="n1" onclick="start()">🚀<br>Missão</button><button id="n2" onclick="show('dash')">📊<br>Desempenho</button><button id="n3" onclick="show('bank')">📚<br>Banco</button><button id="n4" onclick="show('sources')">🔎<br>Fontes</button></nav>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07182d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="INSS Memória NASA">
+<title>🚀 INSS Memória NASA</title>
+
+<style>
+:root{
+  --navy:#07182d;
+  --blue:#1976b9;
+  --blue2:#0e91c4;
+  --light:#edf4fb;
+  --card:#ffffff;
+  --text:#14243a;
+  --muted:#687991;
+  --green:#16844d;
+  --green-bg:#e6f6ed;
+  --red:#d92323;
+  --red-bg:#fdeaea;
+  --yellow:#f6b800;
+  --yellow-bg:#fff7d9;
+  --border:#dce5ef;
+  --shadow:0 8px 25px rgba(16,42,70,.08);
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--light);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  padding-bottom:90px;
+}
+
+button{
+  font:inherit;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.header{
+  background:linear-gradient(135deg,#07182d,#1767a5,#1976b9);
+  color:white;
+  padding:38px 20px 32px;
+  text-align:center;
+}
+
+.header h1{
+  margin:0;
+  font-size:34px;
+  line-height:1.1;
+  font-weight:800;
+}
+
+.header p{
+  margin:16px auto 0;
+  max-width:700px;
+  font-size:19px;
+  line-height:1.35;
+  opacity:.96;
+}
+
+.container{
+  width:min(960px,calc(100% - 24px));
+  margin:18px auto;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.stat{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:22px 12px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+
+.stat .number{
+  font-size:38px;
+  font-weight:800;
+}
+
+.stat .label{
+  color:var(--muted);
+  margin-top:5px;
+  font-size:16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:26px;
+  margin-top:16px;
+  box-shadow:var(--shadow);
+}
+
+.badge{
+  display:inline-block;
+  background:#e8f3fc;
+  color:#166ba5;
+  border-radius:999px;
+  padding:9px 15px;
+  font-weight:800;
+  font-size:15px;
+}
+
+.card h2{
+  margin:17px 0 10px;
+  font-size:29px;
+  line-height:1.2;
+}
+
+.card h3{
+  font-size:22px;
+  margin:18px 0 10px;
+}
+
+.muted{
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.progress{
+  height:12px;
+  background:#dce6f0;
+  border-radius:999px;
+  overflow:hidden;
+  margin:22px 0;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#10a9c7,#176db2);
+  border-radius:999px;
+  transition:.3s;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.btn{
+  border:0;
+  border-radius:20px;
+  padding:18px 16px;
+  font-weight:800;
+  font-size:19px;
+  transition:.15s;
+}
+
+.btn:active{
+  transform:scale(.98);
+}
+
+.btn-primary{
+  background:#1976b9;
+  color:white;
+}
+
+.btn-yellow{
+  background:#f8b900;
+  color:#111;
+}
+
+.btn-light{
+  background:#e8eef5;
+  color:#14243a;
+}
+
+.btn-green{
+  background:#16844d;
+  color:white;
+}
+
+.btn-red{
+  background:#d92323;
+  color:white;
+}
+
+.notice{
+  background:var(--yellow-bg);
+  color:#705700;
+  border-radius:20px;
+  padding:17px;
+  margin-top:16px;
+  line-height:1.45;
+}
+
+.question{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:26px;
+  box-shadow:var(--shadow);
+}
+
+.question-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.tag{
+  background:#e8f3fc;
+  color:#176ba4;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:14px;
+  font-weight:800;
+}
+
+.tag.green{
+  background:#e5f5ec;
+  color:#17834d;
+}
+
+.tag.orange{
+  background:#fff0cf;
+  color:#875900;
+}
+
+.question-text{
+  font-size:25px;
+  line-height:1.45;
+  font-weight:700;
+  margin:22px 0;
+}
+
+.answer-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.answer{
+  border:3px solid #dfe7ef;
+  border-radius:20px;
+  background:#f7f9fb;
+  padding:22px 10px;
+  font-weight:800;
+  font-size:22px;
+  color:#68717d;
+}
+
+.answer.certo{
+  border-color:#16844d;
+}
+
+.answer.errado{
+  border-color:#d92323;
+}
+
+.answer:disabled{
+  opacity:.55;
+}
+
+.feedback{
+  margin-top:18px;
+  padding:20px;
+  border-radius:20px;
+  line-height:1.55;
+}
+
+.feedback.correct{
+  background:var(--green-bg);
+  border-left:6px solid var(--green);
+}
+
+.feedback.wrong{
+  background:var(--red-bg);
+  border-left:6px solid var(--red);
+}
+
+.feedback strong{
+  font-size:21px;
+}
+
+.next-review{
+  margin-top:10px;
+  font-weight:700;
+}
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:78px;
+  background:rgba(255,255,255,.97);
+  border-top:1px solid #dce3ea;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  z-index:1000;
+  box-shadow:0 -5px 20px rgba(0,0,0,.05);
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:#718096;
+  font-size:12px;
+  font-weight:700;
+}
+
+.nav-btn .icon{
+  display:block;
+  font-size:23px;
+  margin-bottom:3px;
+}
+
+.nav-btn.active{
+  color:#176db0;
+}
+
+.nav-btn.active .icon{
+  background:#e8f3fc;
+  border-radius:18px;
+  width:62px;
+  margin:0 auto 3px;
+  padding:3px;
+}
+
+.subject{
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  margin-top:12px;
+  background:#fff;
+}
+
+.subject-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.subject-name{
+  font-weight:800;
+}
+
+.mini-bar{
+  height:9px;
+  background:#e4ebf2;
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.mini-fill{
+  height:100%;
+  background:#1976b9;
+  border-radius:99px;
+}
+
+.list{
+  display:grid;
+  gap:10px;
+}
+
+.bank-item{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+}
+
+.bank-item strong{
+  display:block;
+  margin-bottom:7px;
+}
+
+.filter-row{
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding-bottom:4px;
+}
+
+.filter{
+  white-space:nowrap;
+  border:1px solid var(--border);
+  background:white;
+  border-radius:999px;
+  padding:9px 13px;
+  font-weight:700;
+}
+
+.filter.active{
+  background:#1976b9;
+  color:white;
+}
+
+.empty{
+  text-align:center;
+  padding:35px 15px;
+  color:var(--muted);
+}
+
+.small{
+  font-size:14px;
+}
+
+.center{
+  text-align:center;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:600px){
+  .header{
+    padding:30px 16px 27px;
+  }
+
+  .header h1{
+    font-size:29px;
+  }
+
+  .header p{
+    font-size:17px;
+  }
+
+  .card,.question{
+    padding:21px;
+    border-radius:24px;
+  }
+
+  .card h2{
+    font-size:26px;
+  }
+
+  .question-text{
+    font-size:22px;
+  }
+
+  .btn{
+    font-size:17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <h1>🚀 INSS Memória NASA</h1>
+  <p>Missão aprovação • 30 minutos • CEBRASPE • revisão inteligente</p>
+</header>
+
+<main class="container">
+
+<!-- =========================
+     INÍCIO
+========================= -->
+
+<section id="home" class="page active">
+
+  <div class="grid">
+    <div class="stat">
+      <div class="number" id="statPoints">0</div>
+      <div class="label">Pontos</div>
+    </div>
+
+    <div class="stat">
+      <div class="number" id="statCorrect">0</div>
+      <div class="label">Acertos</div>
+    </div>
+
+    <div class="stat">
+      <div class="number" id="statAnswered">0</div>
+      <div class="label">Respondidas</div>
+    </div>
+
+    <div class="stat">
+      <div class="number" id="statStreak">0</div>
+      <div class="label">Sequência</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge">🧠 MISSÃO ADAPTATIVA</span>
+
+    <h2>Atacar o que você mais precisa.</h2>
+
+    <p class="muted">
+      Errou um tema? Ele ganha prioridade.
+      Dominou? A frequência diminui.
+      A missão também considera o momento de revisão de cada questão.
+    </p>
+
+    <div class="progress">
+      <div class="progress-bar" id="homeProgress"></div>
+    </div>
+
+    <h3 id="missionCountHome">0/12 questões da missão</h3>
+
+    <div class="actions">
+      <button class="btn btn-primary" onclick="startMission()">
+        🚀 Iniciar missão
+      </button>
+
+      <button class="btn btn-light" onclick="showPage('performance')">
+        📊 Desempenho
+      </button>
+    </div>
+
+    <div class="notice">
+      <strong>Padrão CEBRASPE:</strong>
+      julgue cada item como <strong>Certo (C)</strong> ou
+      <strong>Errado (E)</strong>.
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge">🧠 COMO A NASA TRABALHA</span>
+
+    <h2>Seu cérebro não recebe uma lista aleatória.</h2>
+
+    <p class="muted">
+      O sistema combina recuperação ativa, repetição espaçada,
+      interleaving, feedback imediato e seleção adaptativa.
+    </p>
+
+    <div class="subject">
+      <strong>1. Recuperação ativa</strong>
+      <p class="muted small">
+        Você precisa recuperar a informação antes de receber a explicação.
+      </p>
+    </div>
+
+    <div class="subject">
+      <strong>2. Repetição espaçada</strong>
+      <p class="muted small">
+        Questões erradas retornam antes. Questões dominadas aparecem com
+        intervalos maiores.
+      </p>
+    </div>
+
+    <div class="subject">
+      <strong>3. Interleaving</strong>
+      <p class="muted small">
+        O sistema mistura matérias para evitar a falsa sensação de domínio.
+      </p>
+    </div>
+
+    <div class="subject">
+      <strong>4. Feedback corretivo</strong>
+      <p class="muted small">
+        Depois da resposta você recebe o gabarito, explicação e uma âncora
+        de memória.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- =========================
+     MISSÃO
+========================= -->
+
+<section id="mission" class="page">
+
+  <div id="missionIntro" class="card">
+
+    <span class="badge">🚀 MISSÃO DE 30 MINUTOS</span>
+
+    <h2>12 questões selecionadas para você.</h2>
+
+    <p class="muted">
+      A seleção considera seus erros, seu desempenho por tema,
+      questões atrasadas para revisão e variedade de matérias.
+    </p>
+
+    <div class="progress">
+      <div class="progress-bar" id="missionProgress"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" onclick="beginMissionQuestions()">
+        🚀 Começar
+      </button>
+
+      <button class="btn btn-light" onclick="showPage('home')">
+        🏠 Voltar
+      </button>
+    </div>
+  </div>
+
+  <div id="questionArea"></div>
+
+</section>
+
+
+<!-- =========================
+     DESEMPENHO
+========================= -->
+
+<section id="performance" class="page">
+
+  <div class="card">
+    <span class="badge">📊 PAINEL DE DESEMPENHO</span>
+
+    <h2>Seu mapa de domínio.</h2>
+
+    <p class="muted">
+      O objetivo não é apenas saber quantas você acertou.
+      É descobrir <strong>onde</strong>, <strong>como</strong> e
+      <strong>quando</strong> revisar.
+    </p>
+
+    <div id="performanceSummary"></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">🎯 PRIORIDADES</span>
+    <div id="priorityList"></div>
+  </div>
+
+</section>
+
+
+<!-- =========================
+     BANCO
+========================= -->
+
+<section id="bank" class="page">
+
+  <div class="card">
+
+    <span class="badge">📚 BANCO ROBUSTO</span>
+
+    <h2>Banco autoral classificado.</h2>
+
+    <p class="muted">
+      Os itens abaixo são autorais e seguem o formato Certo/Errado.
+      As fontes oficiais são mantidas separadas para consulta.
+    </p>
+
+    <div class="filter-row" id="filters"></div>
+
+    <div id="bankList" class="list"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FONTES
+========================= -->
+
+<section id="sources" class="page">
+
+  <div class="card">
+
+    <span class="badge">🔎 FONTES</span>
+
+    <h2>Consulta oficial</h2>
+
+    <p class="muted">
+      O aplicativo usa questões autorais para estudo e mantém as fontes
+      oficiais separadas para conferência.
+    </p>
+
+    <div class="subject">
+      <strong>📄 Edital / publicações oficiais</strong>
+      <p class="muted small">
+        Consulte sempre a publicação oficial correspondente ao concurso
+        que você estiver estudando.
+      </p>
+
+      <a href="https://www.cebraspe.org.br/concursos"
+         target="_blank"
+         rel="noopener"
+         class="btn btn-primary"
+         style="display:block;text-align:center;text-decoration:none;margin-top:12px;">
+        Abrir CEBRASPE
+      </a>
+    </div>
+
+    <div class="subject">
+      <strong>🏛️ Portal Gov.br</strong>
+      <p class="muted small">
+        Para consulta de legislação e informações oficiais.
+      </p>
+
+      <a href="https://www.gov.br"
+         target="_blank"
+         rel="noopener"
+         class="btn btn-primary"
+         style="display:block;text-align:center;text-decoration:none;margin-top:12px;">
+        Abrir Gov.br
+      </a>
+    </div>
+
+    <div class="notice">
+      <strong>Importante:</strong>
+      as questões autorais deste aplicativo não substituem a conferência
+      do texto legal e dos materiais oficiais.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     NAVEGAÇÃO
+========================= -->
+
+<nav class="bottom-nav">
+
+  <button class="nav-btn active" data-page="home" onclick="showPage('home')">
+    <span class="icon">🏠</span>
+    Início
+  </button>
+
+  <button class="nav-btn" data-page="mission" onclick="showPage('mission')">
+    <span class="icon">🚀</span>
+    Missão
+  </button>
+
+  <button class="nav-btn" data-page="performance" onclick="showPage('performance')">
+    <span class="icon">📊</span>
+    Desempenho
+  </button>
+
+  <button class="nav-btn" data-page="bank" onclick="showPage('bank')">
+    <span class="icon">📚</span>
+    Banco
+  </button>
+
+  <button class="nav-btn" data-page="sources" onclick="showPage('sources')">
+    <span class="icon">🔎</span>
+    Fontes
+  </button>
+
+</nav>
+
+
 <script>
-const PACK=
-"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
-".replace(/\s+/g,"");
-const DAY=86400000,KEY="nasaINSS_NASA_V5";let BANK=[],Q=[],S=JSON.parse(localStorage.getItem(KEY)||"null")||{score:0,correct:0,total:0,streak:0,best:0,done:0,hist:{},session:[],pos:0};if(!Object.keys(S.hist||{}).length){try{const o=JSON.parse(localStorage.getItem("nasaINSS")||"null");if(o&&o.hist)S.hist=o.hist;}catch(e){}}S.hist=S.hist||{};const el=id=>document.getElementById(id);function save(){localStorage.setItem(KEY,JSON.stringify(S));stats()}function h(i){if(!S.hist[i])S.hist[i]={c:0,e:0,last:0,due:0,interval:0,ease:2.5,streak:0,lapses:0,seen:0};let x=S.hist[i];x.c=+x.c||0;x.e=+x.e||0;x.last=+x.last||0;x.due=+x.due||0;x.interval=+x.interval||0;x.ease=+x.ease||2.5;x.streak=+x.streak||0;x.lapses=+x.lapses||0;x.seen=+x.seen||0;return x}function acc(x){return x.c+x.e?x.c/(x.c+x.e):0}function due(x){return x.due&&x.due<=Date.now()}function mastery(i){let x=h(i);if(!x.seen)return 0;return Math.round(Math.max(0,Math.min(100,acc(x)*70+Math.min(x.streak,5)/5*30)))}function pri(i){let q=Q[i],x=h(i),a=acc(x),m=mastery(i),age=x.last?(Date.now()-x.last)/DAY:999,p=(q.peso_prioridade||1.5)+(q.nivel||2)*.25;if(!x.seen)p+=5;if(due(x))p+=12+Math.min(12,Math.max(0,(Date.now()-x.due)/DAY)*1.5);p+=Math.min(20,x.e*5.5);if(a<.75)p+=(.75-a)*12;p+=(100-m)*.06;if(age>7)p+=Math.min(5,(age-7)*.3);if(x.last&&age<.5&&!due(x))p-=9;if(x.interval>=14&&!due(x))p-=3;return p}function choose(){let a=Q.map((q,i)=>({q,i,p:pri(i),r:Math.random()})),out=[],topics=new Set;while(out.length<12&&a.length){a.sort((x,y)=>(y.p+y.r*1.2)-(x.p+x.r*1.2));let k=a.findIndex(x=>!topics.has(x.q.disciplina));if(k<0)k=0;let x=a.splice(k,1)[0];out.push(x.i);topics.add(x.q.disciplina)}return out}function show(id){document.querySelectorAll("main section").forEach(x=>x.classList.add("hidden"));el(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));let m={home:"n0",mission:"n1",dash:"n2",bank:"n3",sources:"n4"};if(m[id])el(m[id]).classList.add("active");if(id==="dash")dash();if(id==="bank")bankView();scrollTo(0,0)}function start(){S.session=choose();S.pos=0;S.done=0;save();show("mission");render()}function render(){let i=S.session[S.pos],q=Q[i],x=h(i);el("meta").innerHTML='<span class="badge">Questão '+(S.pos+1)+'/12</span><span class="badge author">AUTORAL • CEBRASPE</span><span class="badge">'+q.disciplina+'</span>'+(due(x)?'<span class="badge due">🔁 REVISÃO VENCIDA</span>':'');el("qprogress").style.width=S.pos/12*100+"%";el("question").textContent=q.enunciado;el("feedback").innerHTML="";el("C").className=el("E").className="choice";el("C").disabled=el("E").disabled=false;el("next").classList.add("hidden")}function schedule(x,ok){let old=x.interval||0;if(!ok){x.lapses++;x.streak=0;x.ease=Math.max(1.7,x.ease-.2);x.interval=1}else{x.streak++;x.ease=Math.min(3,x.ease+.1);if(x.streak===1)x.interval=1;else if(x.streak===2)x.interval=3;else if(x.streak===3)x.interval=7;else if(x.streak===4)x.interval=14;else x.interval=Math.min(60,Math.max(21,Math.round((old||14)*x.ease)))}}function answer(a){let i=S.session[S.pos],q=Q[i],x=h(i),ok=a===q.gabarito;x.seen++;x.last=Date.now();x[ok?"c":"e"]++;schedule(x,ok);x.due=Date.now()+x.interval*DAY;S.total++;if(ok){S.correct++;S.score+=10;S.streak++;S.best=Math.max(S.best,S.streak)}else{S.score=Math.max(0,S.score-2);S.streak=0}S.done=Math.min(12,S.done+1);save();el(a).classList.add(ok?"correct":"wrong");el("C").disabled=el("E").disabled=true;document.querySelectorAll(".choice").forEach((b,n)=>{if((n===0?"C":"E")===q.gabarito)b.classList.add("correct")});let nd=new Date(x.due).toLocaleDateString("pt-BR"),msg=ok?(x.streak<=2?"Consolidação inicial: o próximo contato será curto para fortalecer a memória.":"Consolidação: os acertos consecutivos ampliaram o intervalo."):"Reforço ativo: este item volta em 1 dia para nova recuperação.";el("feedback").innerHTML='<div class="explain"><b>'+(ok?"🎯 ACERTOU!":"🧠 ERRO ESTRATÉGICO — reforço ativado")+'</b><br>'+q.explicacao+'<br><br><span class="small"><b>Metacognição:</b> '+msg+'<br><b>Próxima revisão:</b> '+nd+' • <b>intervalo:</b> '+x.interval+' dia(s) • <b>domínio:</b> '+mastery(i)+'%</span></div>';el("next").classList.remove("hidden")}function next(){if(S.pos>=11){el("question").textContent="🏆 Missão concluída!";el("meta").innerHTML='<span class="badge mastered">NASA COMPLETA</span>';el("choices").innerHTML="";el("feedback").innerHTML='<div class="explain"><b>12 questões concluídas.</b><br>A próxima missão será recalculada pelo motor adaptativo.</div>';el("next").classList.add("hidden");el("qprogress").style.width="100%";save();return}S.pos++;render();scrollTo(0,0)}function stats(){el("score").textContent=S.score;el("correct").textContent=S.correct;el("total").textContent=S.total;el("streak").textContent=S.streak;el("missionText").textContent=S.done+"/12 questões da missão";el("missionProgress").style.width=Math.min(12,S.done)/12*100+"%";if(el("accuracy")){el("accuracy").textContent=S.total?Math.round(S.correct/S.total*100)+"%":"0%";el("best").textContent=S.best||0;el("level").textContent=Math.max(1,1+Math.floor(S.score/100));el("dueCount").textContent=Q.filter((q,i)=>due(h(i))).length}}function dash(){stats();let d={};Q.forEach(function(q,i){let t=q.disciplina,x=h(i);if(!d[t])d[t]={c:0,e:0,p:0,d:0,n:0};d[t].c+=x.c;d[t].e+=x.e;d[t].p+=pri(i);d[t].n++;if(due(x))d[t].d++;});let rows=Object.keys(d).map(function(t){return [t,d[t]];}).sort(function(a,b){return b[1].p/b[1].n-a[1].p/a[1].n;});el("topics").innerHTML=rows.map(function(pair){let t=pair[0],x=pair[1],a=x.c+x.e,p=a?Math.round(x.c/a*100):0;return '<div class="topic"><div style="flex:1"><b>'+t+'</b><div class="small muted">'+a+' respostas • '+p+'% de acerto • prioridade '+(x.p/x.n).toFixed(1)+(x.d?' • '+x.d+' revisão(ões) vencida(s)':'')+'</div><div class="meter"><i style="width:'+p+'%"></i></div></div></div>';}).join("");let dueItems=Q.map(function(q,i){return {q:q,i:i,x:h(i)};}).filter(function(z){return due(z.x);}).sort(function(a,b){return a.x.due-b.x.due;});el("reviewSummary").textContent=dueItems.length?dueItems.length+" item(ns) vencido(s). Eles recebem prioridade na próxima missão.":"Nenhuma revisão vencida agora.";el("dueList").innerHTML=dueItems.slice(0,10).map(function(z){return '<div class="topic"><div><b>'+z.q.disciplina+'</b><div class="small">'+z.q.subtema+'</div><div class="small muted">intervalo '+z.x.interval+' dia(s) • erros '+z.x.e+'</div></div><span class="badge due">REVISAR</span></div>';}).join("");let top=Q.map(function(q,i){return {q:q,i:i,p:pri(i)};}).sort(function(a,b){return b.p-a.p;}).slice(0,8);el("selection").innerHTML=top.map(function(z,n){return '<div class="topic"><div><b>#'+(n+1)+' '+z.q.disciplina+'</b><div class="small">'+z.q.subtema+'</div><div class="small muted">prioridade '+z.p.toFixed(1)+' • domínio '+mastery(z.i)+'%</div></div></div>';}).join("");}function bankView(){let f=el("subjectFilter").value||"ALL",a=f==="ALL"?Q:Q.filter(q=>q.disciplina===f);el("bankList").innerHTML=a.slice(0,80).map(q=>{let x=h(q.index),tag=due(x)?'<span class="badge due">REVISÃO</span>':x.seen&&mastery(q.index)>=80?'<span class="badge mastered">DOMÍNIO</span>':'<span class="badge author">AUTORAL</span>';return '<div class="topic"><div><b>'+q.disciplina+'</b> '+tag+'<div class="small">'+q.subtema+'</div><div class="small">Nível '+q.nivel+' • prioridade base '+q.peso_prioridade+'</div></div></div>'}).join("")+(a.length>80?'<p class="small muted">Mostrando os primeiros 80 itens para manter o carregamento rápido no iPhone. O motor usa os 300.</p>':'')}function initFilter(){let s=[...new Set(Q.map(q=>q.disciplina))].sort();el("subjectFilter").innerHTML='<option value="ALL">Todas as disciplinas ('+Q.length+' itens)</option>'+s.map(x=>'<option>'+x+'</option>').join("")}function resetData(){if(confirm("Zerar o histórico deste aparelho?")){localStorage.removeItem(KEY);localStorage.removeItem("nasaINSS");location.reload()}}let secs=1800,timerId=null;function drawTimer(){el("timer").textContent=String(Math.floor(secs/60)).padStart(2,"0")+":"+String(secs%60).padStart(2,"0")}function toggleTimer(){if(timerId){clearInterval(timerId);timerId=null;el("timerBtn").textContent="Continuar";return}el("timerBtn").textContent="Pausar";timerId=setInterval(()=>{if(secs<=0){clearInterval(timerId);timerId=null;el("timerBtn").textContent="Concluído 🎯";return}secs--;drawTimer()},1000)}function resetTimer(){clearInterval(timerId);timerId=null;secs=1800;drawTimer();el("timerBtn").textContent="Iniciar"}
-async function boot(){try{let bytes=Uint8Array.from(atob(PACK),c=>c.charCodeAt(0));let text=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate"))).text();BANK=JSON.parse(text);Q=BANK.map((x,i)=>({...x,index:i}));initFilter();stats();drawTimer()}catch(e){document.body.innerHTML='<div style="padding:24px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif"><h2>🚀 INSS Memória NASA</h2><p>Não foi possível carregar o banco local. Reabra a página após atualizar o Safari.</p></div>'}}boot();
-</script></body></html>
+/* ============================================================
+   INSS MEMÓRIA NASA
+   MOTOR COMPLETO
+   ============================================================ */
+
+
+/* ============================================================
+   BANCO AUTORAL
+   ============================================================ */
+
+const QUESTION_BANK = [
+
+/* =========================
+   DIREITO PREVIDENCIÁRIO
+========================= */
+
+{
+ id:"DP001",
+ subject:"Direito Previdenciário",
+ topic:"Seguridade Social",
+ difficulty:1,
+ statement:"A seguridade social compreende saúde, previdência social e assistência social.",
+ answer:"C",
+ explanation:"A Constituição estrutura a seguridade social nessas três áreas.",
+ memory:"🧠 Âncora: SEGURIDADE = Saúde + Previdência + Assistência.",
+ source:"CF/88, art. 194"
+},
+
+{
+ id:"DP002",
+ subject:"Direito Previdenciário",
+ topic:"Seguridade Social",
+ difficulty:2,
+ statement:"A previdência social possui caráter contributivo e filiação facultativa para todos os trabalhadores.",
+ answer:"E",
+ explanation:"No RGPS, a filiação é obrigatória para quem exerce atividade abrangida, enquanto a previdência complementar possui natureza facultativa.",
+ memory:"🧠 Cuidado com a palavra TODOS: no RGPS, a filiação pode ser obrigatória.",
+ source:"CF/88, art. 201"
+},
+
+{
+ id:"DP003",
+ subject:"Direito Previdenciário",
+ topic:"Princípios",
+ difficulty:2,
+ statement:"A universalidade da cobertura e do atendimento é um dos objetivos da seguridade social.",
+ answer:"C",
+ explanation:"A universalidade da cobertura e do atendimento integra os objetivos da seguridade social.",
+ memory:"🧠 Universalidade = alcançar a proteção social de forma ampla.",
+ source:"CF/88, art. 194"
+},
+
+{
+ id:"DP004",
+ subject:"Direito Previdenciário",
+ topic:"RGPS",
+ difficulty:2,
+ statement:"O Regime Geral de Previdência Social possui caráter contributivo.",
+ answer:"C",
+ explanation:"O RGPS é estruturado em caráter contributivo e de filiação obrigatória, observados os requisitos constitucionais e legais.",
+ memory:"🧠 Previdência não é simplesmente assistência: há contribuição.",
+ source:"CF/88, art. 201"
+},
+
+{
+ id:"DP005",
+ subject:"Direito Previdenciário",
+ topic:"Segurado",
+ difficulty:2,
+ statement:"A pessoa que exerce atividade remunerada abrangida pelo RGPS pode ser segurada obrigatória.",
+ answer:"C",
+ explanation:"A atividade remunerada enquadrada na legislação previdenciária pode gerar filiação obrigatória.",
+ memory:"🧠 Trabalho abrangido + remuneração = atenção à filiação obrigatória.",
+ source:"Lei 8.213/1991"
+},
+
+{
+ id:"DP006",
+ subject:"Direito Previdenciário",
+ topic:"Dependentes",
+ difficulty:2,
+ statement:"Os dependentes do segurado são organizados em classes previstas na legislação previdenciária.",
+ answer:"C",
+ explanation:"A legislação estabelece classes de dependentes e regras próprias de dependência econômica.",
+ memory:"🧠 Dependente não é qualquer pessoa: existe ordem legal.",
+ source:"Lei 8.213/1991"
+},
+
+{
+ id:"DP007",
+ subject:"Direito Previdenciário",
+ topic:"Benefícios",
+ difficulty:2,
+ statement:"A concessão de benefício previdenciário independe de qualquer requisito legal.",
+ answer:"E",
+ explanation:"Os benefícios dependem do preenchimento dos requisitos previstos na Constituição e na legislação.",
+ memory:"🧠 Benefício = requisito + comprovação.",
+ source:"Legislação previdenciária"
+},
+
+{
+ id:"DP008",
+ subject:"Direito Previdenciário",
+ topic:"Carência",
+ difficulty:3,
+ statement:"Carência e tempo de contribuição são conceitos necessariamente idênticos.",
+ answer:"E",
+ explanation:"Carência e tempo de contribuição são institutos distintos e possuem regras próprias.",
+ memory:"🧠 NÃO iguale automaticamente carência e contribuição.",
+ source:"Legislação previdenciária"
+},
+
+{
+ id:"DP009",
+ subject:"Direito Previdenciário",
+ topic:"Salário de contribuição",
+ difficulty:3,
+ statement:"O salário de contribuição é utilizado, conforme as regras legais, no cálculo de determinadas prestações previdenciárias.",
+ answer:"C",
+ explanation:"O salário de contribuição possui papel relevante na composição do cálculo de benefícios e contribuições.",
+ memory:"🧠 Contribuição → base de cálculo → reflexos previdenciários.",
+ source:"Lei 8.212/1991"
+},
+
+{
+ id:"DP010",
+ subject:"Direito Previdenciário",
+ topic:"Assistência Social",
+ difficulty:2,
+ statement:"A assistência social é prestada a quem dela necessitar, independentemente de contribuição à seguridade social.",
+ answer:"C",
+ explanation:"A assistência social possui caráter não contributivo.",
+ memory:"🧠 ASSISTÊNCIA = necessita, não precisa contribuir.",
+ source:"CF/88, art. 203"
+},
+
+{
+ id:"DP011",
+ subject:"Direito Previdenciário",
+ topic:"Saúde",
+ difficulty:1,
+ statement:"As ações e serviços públicos de saúde integram a seguridade social.",
+ answer:"C",
+ explanation:"A saúde integra a seguridade social juntamente com previdência e assistência.",
+ memory:"🧠 As três caixas: Saúde + Previdência + Assistência.",
+ source:"CF/88"
+},
+
+{
+ id:"DP012",
+ subject:"Direito Previdenciário",
+ topic:"Financiamento",
+ difficulty:3,
+ statement:"A seguridade social é financiada exclusivamente pelas contribuições dos segurados.",
+ answer:"E",
+ explanation:"O financiamento é feito por toda a sociedade, de forma direta e indireta, nos termos constitucionais.",
+ memory:"🧠 EXCLUSIVAMENTE é a armadilha.",
+ source:"CF/88, art. 195"
+},
+
+
+/* =========================
+   DIREITO CONSTITUCIONAL
+========================= */
+
+{
+ id:"DC001",
+ subject:"Direito Constitucional",
+ topic:"Direitos Fundamentais",
+ difficulty:1,
+ statement:"Todos são iguais perante a lei, sem distinção de qualquer natureza, nos termos da Constituição.",
+ answer:"C",
+ explanation:"A igualdade perante a lei está prevista no caput do art. 5º.",
+ memory:"🧠 Art. 5º começa pela igualdade.",
+ source:"CF/88, art. 5º"
+},
+
+{
+ id:"DC002",
+ subject:"Direito Constitucional",
+ topic:"Direitos Fundamentais",
+ difficulty:2,
+ statement:"A inviolabilidade do direito à vida é assegurada pela Constituição Federal.",
+ answer:"C",
+ explanation:"A Constituição assegura a inviolabilidade do direito à vida.",
+ memory:"🧠 Vida é direito fundamental expresso.",
+ source:"CF/88, art. 5º"
+},
+
+{
+ id:"DC003",
+ subject:"Direito Constitucional",
+ topic:"Administração Pública",
+ difficulty:1,
+ statement:"Legalidade, impessoalidade, moralidade, publicidade e eficiência são princípios expressos da administração pública.",
+ answer:"C",
+ explanation:"São os cinco princípios clássicos expressos no caput do art. 37.",
+ memory:"🧠 LIMPE = Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência.",
+ source:"CF/88, art. 37"
+},
+
+{
+ id:"DC004",
+ subject:"Direito Constitucional",
+ topic:"Administração Pública",
+ difficulty:2,
+ statement:"O princípio da eficiência foi expressamente incluído no caput do art. 37 da Constituição.",
+ answer:"C",
+ explanation:"A eficiência integra expressamente os princípios da administração pública.",
+ memory:"🧠 LIMPE termina em E de Eficiência.",
+ source:"CF/88, art. 37"
+},
+
+{
+ id:"DC005",
+ subject:"Direito Constitucional",
+ topic:"Direitos Sociais",
+ difficulty:1,
+ statement:"A educação, a saúde, o trabalho e a previdência social estão entre os direitos sociais previstos na Constituição.",
+ answer:"C",
+ explanation:"Esses direitos estão entre os direitos sociais constitucionais.",
+ memory:"🧠 Direitos sociais = proteção da vida em sociedade.",
+ source:"CF/88, art. 6º"
+},
+
+{
+ id:"DC006",
+ subject:"Direito Constitucional",
+ topic:"Nacionalidade",
+ difficulty:2,
+ statement:"A Constituição estabelece hipóteses de brasileiros natos e naturalizados.",
+ answer:"C",
+ explanation:"A Constituição diferencia as formas de aquisição da nacionalidade.",
+ memory:"🧠 Nacionalidade tem portas diferentes para nato e naturalizado.",
+ source:"CF/88"
+},
+
+{
+ id:"DC007",
+ subject:"Direito Constitucional",
+ topic:"Organização do Estado",
+ difficulty:2,
+ statement:"A República Federativa do Brasil é formada pela união indissolúvel dos estados, municípios e do Distrito Federal.",
+ answer:"C",
+ explanation:"É a estrutura federativa estabelecida no art. 1º.",
+ memory:"🧠 Federação = União + Estados + DF + Municípios.",
+ source:"CF/88, art. 1º"
+},
+
+{
+ id:"DC008",
+ subject:"Direito Constitucional",
+ topic:"Separação de Poderes",
+ difficulty:2,
+ statement:"São Poderes da União, independentes e harmônicos entre si, o Legislativo, o Executivo e o Judiciário.",
+ answer:"C",
+ explanation:"A separação dos Poderes está expressamente prevista na Constituição.",
+ memory:"🧠 LEJ = Legislativo + Executivo + Judiciário.",
+ source:"CF/88, art. 2º"
+},
+
+{
+ id:"DC009",
+ subject:"Direito Constitucional",
+ topic:"Direitos Fundamentais",
+ difficulty:2,
+ statement:"É livre a manifestação do pensamento, sendo permitido o anonimato.",
+ answer:"E",
+ explanation:"A manifestação do pensamento é livre, mas o anonimato é vedado.",
+ memory:"🧠 Manifestação LIVRE; anonimato PROIBIDO.",
+ source:"CF/88, art. 5º, IV"
+},
+
+{
+ id:"DC010",
+ subject:"Direito Constitucional",
+ topic:"Administração Pública",
+ difficulty:3,
+ statement:"A investidura em cargo ou emprego público depende, em regra, de aprovação prévia em concurso público.",
+ answer:"C",
+ explanation:"A Constituição estabelece o concurso como regra de acesso aos cargos e empregos públicos.",
+ memory:"🧠 Regra = concurso; exceções dependem da Constituição.",
+ source:"CF/88, art. 37"
+},
+
+
+/* =========================
+   DIREITO ADMINISTRATIVO
+========================= */
+
+{
+ id:"DA001",
+ subject:"Direito Administrativo",
+ topic:"Princípios",
+ difficulty:1,
+ statement:"A administração pública deve observar os princípios da legalidade, impessoalidade, moralidade, publicidade e eficiência.",
+ answer:"C",
+ explanation:"São princípios expressos no art. 37 da Constituição.",
+ memory:"🧠 LIMPE.",
+ source:"CF/88, art. 37"
+},
+
+{
+ id:"DA002",
+ subject:"Direito Administrativo",
+ topic:"Atos Administrativos",
+ difficulty:2,
+ statement:"Todo ato administrativo é necessariamente discricionário.",
+ answer:"E",
+ explanation:"Existem atos vinculados e atos discricionários.",
+ memory:"🧠 Ato administrativo pode ser VINCULADO ou DISCRICIONÁRIO.",
+ source:"Direito Administrativo"
+},
+
+{
+ id:"DA003",
+ subject:"Direito Administrativo",
+ topic:"Poderes",
+ difficulty:2,
+ statement:"O poder hierárquico relaciona-se à organização interna da Administração.",
+ answer:"C",
+ explanation:"A hierarquia organiza competências e relações internas na Administração.",
+ memory:"🧠 Hierarquia = organização interna.",
+ source:"Direito Administrativo"
+},
+
+{
+ id:"DA004",
+ subject:"Direito Administrativo",
+ topic:"Poder de Polícia",
+ difficulty:3,
+ statement:"O poder de polícia permite à Administração limitar ou disciplinar direitos e atividades em benefício do interesse público, dentro dos limites legais.",
+ answer:"C",
+ explanation:"O poder de polícia possui finalidade de proteção do interesse coletivo e deve respeitar a legalidade.",
+ memory:"🧠 Polícia administrativa = limitar para proteger o coletivo.",
+ source:"Direito Administrativo"
+},
+
+{
+ id:"DA005",
+ subject:"Direito Administrativo",
+ topic:"Serviços Públicos",
+ difficulty:2,
+ statement:"Serviço público pode ser prestado diretamente pelo Estado ou por meio de delegação, conforme a legislação.",
+ answer:"C",
+ explanation:"A prestação pode assumir diferentes formas juridicamente admitidas.",
+ memory:"🧠 Serviço público pode ser direto ou delegado.",
+ source:"Direito Administrativo"
+},
+
+{
+ id:"DA006",
+ subject:"Direito Administrativo",
+ topic:"Agentes Públicos",
+ difficulty:2,
+ statement:"O agente público atua sempre em nome próprio e sem relação com o Estado.",
+ answer:"E",
+ explanation:"O agente público exerce função estatal e atua dentro das competências atribuídas pelo ordenamento.",
+ memory:"🧠 Agente público = exercício de função estatal.",
+ source:"Direito Administrativo"
+},
+
+{
+ id:"DA007",
+ subject:"Direito Administrativo",
+ topic:"Responsabilidade Civil",
+ difficulty:3,
+ statement:"A responsabilidade civil do Estado possui previsão constitucional.",
+ answer:"C",
+ explanation:"A Constituição prevê responsabilidade das pessoas jurídicas de direito público e de direito privado prestadoras de serviço público.",
+ memory:"🧠 Responsabilidade do Estado está na Constituição.",
+ source:"CF/88, art. 37"
+},
+
+{
+ id:"DA008",
+ subject:"Direito Administrativo",
+ topic:"Licitações",
+ difficulty:2,
+ statement:"A contratação pública deve observar os princípios e regras estabelecidos na legislação aplicável.",
+ answer:"C",
+ explanation:"As contratações públicas estão submetidas ao regime jurídico próprio.",
+ memory:"🧠 Licitação = procedimento + princípios + regras.",
+ source:"Legislação de contratações públicas"
+},
+
+
+/* =========================
+   LÍNGUA PORTUGUESA
+========================= */
+
+{
+ id:"LP001",
+ subject:"Língua Portuguesa",
+ topic:"Interpretação",
+ difficulty:1,
+ statement:"A compreensão de um texto depende apenas do significado isolado das palavras, independentemente do contexto.",
+ answer:"E",
+ explanation:"O contexto é fundamental para interpretar adequadamente um texto.",
+ memory:"🧠 Palavra sem contexto pode mudar de sentido.",
+ source:"Língua Portuguesa"
+},
+
+{
+ id:"LP002",
+ subject:"Língua Portuguesa",
+ topic:"Coesão",
+ difficulty:2,
+ statement:"Pronomes podem atuar como elementos de coesão textual.",
+ answer:"C",
+ explanation:"Pronomes podem retomar ou antecipar elementos do texto.",
+ memory:"🧠 Pronome pode fazer uma ponte entre ideias.",
+ source:"Língua Portuguesa"
+},
+
+{
+ id:"LP003",
+ subject:"Língua Portuguesa",
+ topic:"Coerência",
+ difficulty:2,
+ statement:"Um texto coerente apresenta relação lógica entre suas ideias.",
+ answer:"C",
+ explanation:"Coerência está relacionada à construção de sentido e à compatibilidade das ideias.",
+ memory:"🧠 Coerência = sentido lógico.",
+ source:"Língua Portuguesa"
+},
+
+{
+ id:"LP004",
+ subject:"Língua Portuguesa",
+ topic:"Pontuação",
+ difficulty:2,
+ statement:"A vírgula pode ser utilizada para separar elementos de uma enumeração.",
+ answer:"C",
+ explanation:"A enumeração é uma das situações em que a vírgula pode ser empregada.",
+ memory:"🧠 Lista de elementos = atenção às vírgulas.",
+ source:"Gramática normativa"
+},
+
+{
+ id:"LP005",
+ subject:"Língua Portuguesa",
+ topic:"Concordância",
+ difficulty:2,
+ statement:"O verbo deve observar as regras de concordância com o sujeito.",
+ answer:"C",
+ explanation:"A concordância verbal estabelece relação entre o verbo e seu sujeito.",
+ memory:"🧠 Primeiro encontre o sujeito; depois confira o verbo.",
+ source:"Gramática normativa"
+},
+
+{
+ id:"LP006",
+ subject:"Língua Portuguesa",
+ topic:"Regência",
+ difficulty:3,
+ statement:"A regência verbal trata da relação entre o verbo e seus complementos.",
+ answer:"C",
+ explanation:"A regência analisa a relação exigida pelo verbo e seus complementos.",
+ memory:"🧠 Regência = o que o verbo exige.",
+ source:"Gramática normativa"
+},
+
+{
+ id:"LP007",
+ subject:"Língua Portuguesa",
+ topic:"Semântica",
+ difficulty:2,
+ statement:"Palavras diferentes podem apresentar sentidos semelhantes em determinado contexto.",
+ answer:"C",
+ explanation:"A sinonímia depende do contexto de uso.",
+ memory:"🧠 Sinônimo não é necessariamente absoluto.",
+ source:"Língua Portuguesa"
+},
+
+{
+ id:"LP008",
+ subject:"Língua Portuguesa",
+ topic:"Interpretação",
+ difficulty:3,
+ statement:"Uma inferência textual pode ser construída a partir de informações presentes no texto.",
+ answer:"C",
+ explanation:"Inferir significa chegar a uma conclusão a partir das informações disponíveis.",
+ memory:"🧠 Inferência = texto + raciocínio.",
+ source:"Língua Portuguesa"
+},
+
+
+/* =========================
+   RACIOCÍNIO LÓGICO
+========================= */
+
+{
+ id:"RL001",
+ subject:"Raciocínio Lógico",
+ topic:"Proposições",
+ difficulty:1,
+ statement:"Uma proposição lógica é uma frase que pode ser classificada como verdadeira ou falsa.",
+ answer:"C",
+ explanation:"Essa é a característica fundamental de uma proposição.",
+ memory:"🧠 Proposição = tem valor lógico.",
+ source:"Raciocínio Lógico"
+},
+
+{
+ id:"RL002",
+ subject:"Raciocínio Lógico",
+ topic:"Negação",
+ difficulty:2,
+ statement:"A negação de uma proposição verdadeira é necessariamente verdadeira.",
+ answer:"E",
+ explanation:"A negação inverte o valor lógico da proposição.",
+ memory:"🧠 Negou = inverte.",
+ source:"Raciocínio Lógico"
+},
+
+{
+ id:"RL003",
+ subject:"Raciocínio Lógico",
+ topic:"Conectivos",
+ difficulty:2,
+ statement:"Na conjunção lógica, representada por 'e', a proposição composta é verdadeira quando ambas as proposições são verdadeiras.",
+ answer:"C",
+ explanation:"A conjunção exige que os dois componentes sejam verdadeiros.",
+ memory:"🧠 E = os dois precisam estar certos.",
+ source:"Raciocínio Lógico"
+},
+
+{
+ id:"RL004",
+ subject:"Raciocínio Lógico",
+ topic:"Conectivos",
+ difficulty:2,
+ statement:"Na disjunção inclusiva, a proposição composta é verdadeira quando pelo menos uma das proposições é verdadeira.",
+ answer:"C",
+ explanation:"No 'ou' inclusivo, basta pelo menos uma ser verdadeira.",
+ memory:"🧠 OU = pelo menos uma.",
+ source:"Raciocínio Lógico"
+},
+
+{
+ id:"RL005",
+ subject:"Raciocínio Lógico",
+ topic:"Implicação",
+ difficulty:3,
+ statement:"Na proposição condicional 'se P, então Q', a única situação falsa ocorre quando P é verdadeira e Q é falsa.",
+ answer:"C",
+ explanation:"Essa é a tabela-verdade clássica da implicação material.",
+ memory:"🧠 Condicional só cai quando PROMETEU P e não entregou Q.",
+ source:"Raciocínio Lógico"
+},
+
+{
+ id:"RL006",
+ subject:"Raciocínio Lógico",
+ topic:"Conjuntos",
+ difficulty:2,
+ statement:"A interseção entre dois conjuntos contém os elementos que pertencem aos dois conjuntos.",
+ answer:"C",
+ explanation:"Interseção representa os elementos comuns.",
+ memory:"🧠 INTERSEÇÃO = encontro.",
+ source:"Raciocínio Lógico"
+},
+
+{
+ id:"RL007",
+ subject:"Raciocínio Lógico",
+ topic:"Conjuntos",
+ difficulty:2,
+ statement:"A união de dois conjuntos contém somente os elementos que pertencem simultaneamente aos dois conjuntos.",
+ answer:"E",
+ explanation:"Isso descreve a interseção. A união reúne os elementos pertencentes a pelo menos um dos conjuntos.",
+ memory:"🧠 UNIÃO = junta; INTERSEÇÃO = comum.",
+ source:"Raciocínio Lógico"
+},
+
+{
+ id:"RL008",
+ subject:"Raciocínio Lógico",
+ topic:"Porcentagem",
+ difficulty:2,
+ statement:"Aumentar um valor em 20% e depois reduzi-lo em 20% sempre faz o valor retornar ao original.",
+ answer:"E",
+ explanation:"Os percentuais incidem sobre bases diferentes.",
+ memory:"🧠 +20% e -20% NÃO se anulam.",
+ source:"Matemática básica"
+},
+
+
+/* =========================
+   INFORMÁTICA
+========================= */
+
+{
+ id:"IF001",
+ subject:"Informática",
+ topic:"Internet",
+ difficulty:1,
+ statement:"Um navegador é um programa utilizado para acessar e visualizar recursos disponíveis na web.",
+ answer:"C",
+ explanation:"Navegadores permitem acessar páginas e serviços web.",
+ memory:"🧠 Navegador = porta de entrada para a web.",
+ source:"Informática"
+},
+
+{
+ id:"IF002",
+ subject:"Informática",
+ topic:"Segurança",
+ difficulty:2,
+ statement:"Phishing é uma técnica que pode utilizar mensagens falsas para induzir o usuário a fornecer informações.",
+ answer:"C",
+ explanation:"O phishing utiliza engenharia social para enganar usuários.",
+ memory:"🧠 Phishing = isca digital.",
+ source:"Segurança da Informação"
+},
+
+{
+ id:"IF003",
+ subject:"Informática",
+ topic:"Senhas",
+ difficulty:1,
+ statement:"Utilizar a mesma senha em todos os serviços aumenta a segurança do usuário.",
+ answer:"E",
+ explanation:"A reutilização de senhas aumenta o impacto de um eventual vazamento.",
+ memory:"🧠 Uma senha vazada não deve abrir todas as portas.",
+ source:"Segurança da Informação"
+},
+
+{
+ id:"IF004",
+ subject:"Informática",
+ topic:"Backup",
+ difficulty:1,
+ statement:"Backup é uma cópia de segurança utilizada para possibilitar a recuperação de dados.",
+ answer:"C",
+ explanation:"A finalidade do backup é preservar cópias recuperáveis.",
+ memory:"🧠 Backup = cópia para recuperar.",
+ source:"Informática"
+},
+
+{
+ id:"IF005",
+ subject:"Informática",
+ topic:"Nuvem",
+ difficulty:2,
+ statement:"Armazenamento em nuvem significa necessariamente que os dados estão armazenados exclusivamente no aparelho do usuário.",
+ answer:"E",
+ explanation:"Serviços de nuvem normalmente utilizam infraestrutura remota para armazenamento e processamento.",
+ memory:"🧠 Nuvem = infraestrutura remota.",
+ source:"Informática"
+},
+
+{
+ id:"IF006",
+ subject:"Informática",
+ topic:"Malware",
+ difficulty:2,
+ statement:"Malware é um termo utilizado para designar software malicioso.",
+ answer:"C",
+ explanation:"O termo engloba diferentes tipos de softwares maliciosos.",
+ memory:"🧠 MALware = software malicioso.",
+ source:"Segurança da Informação"
+},
+
+{
+ id:"IF007",
+ subject:"Informática",
+ topic:"Privacidade",
+ difficulty:2,
+ statement:"A autenticação em dois fatores pode aumentar a segurança de uma conta.",
+ answer:"C",
+ explanation:"Ela acrescenta uma camada adicional de autenticação.",
+ memory:"🧠 Duas etapas = duas barreiras.",
+ source:"Segurança da Informação"
+},
+
+{
+ id:"IF008",
+ subject:"Informática",
+ topic:"E-mail",
+ difficulty:2,
+ statement:"Anexos recebidos por e-mail devem ser abertos indiscriminadamente quando o remetente parecer conhecido.",
+ answer:"E",
+ explanation:"Contas podem ser comprometidas e anexos podem conter conteúdo malicioso.",
+ memory:"🧠 Remetente conhecido não significa arquivo seguro.",
+ source:"Segurança da Informação"
+}
+
+];
+
+
+/* ============================================================
+   ESTADO
+============================================================ */
+
+const STORAGE_KEY = "inss_memoria_nasa_v2";
+
+let state = {
+  points:0,
+  correct:0,
+  answered:0,
+  streak:0,
+  bestStreak:0,
+
+  history:{},
+
+  mission:[],
+  missionIndex:0,
+  missionRunning:false,
+
+  lastSubject:null,
+  lastTopic:null,
+
+  createdAt:new Date().toISOString()
+};
+
+
+/* ============================================================
+   CARREGAMENTO
+============================================================ */
+
+function loadState(){
+
+  try{
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if(saved){
+
+      const parsed = JSON.parse(saved);
+
+      state = Object.assign(state,parsed);
+
+      if(!state.history) state.history={};
+      if(!Array.isArray(state.mission)) state.mission=[];
+    }
+
+  }catch(error){
+
+    console.log("Não foi possível carregar o progresso.",error);
+
+  }
+}
+
+
+function saveState(){
+
+  try{
+
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+
+  }catch(error){
+
+    console.log("Não foi possível salvar o progresso.",error);
+
+  }
+}
+
+
+/* ============================================================
+   NAVEGAÇÃO
+============================================================ */
+
+function showPage(page){
+
+  document.querySelectorAll(".page").forEach(el=>{
+    el.classList.remove("active");
+  });
+
+  const target=document.getElementById(page);
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.page===page
+    );
+  });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  if(page==="performance"){
+    renderPerformance();
+  }
+
+  if(page==="bank"){
+    renderBank();
+  }
+
+  if(page==="home"){
+    renderHome();
+  }
+}
+
+
+/* ============================================================
+   MOTOR DE REPETIÇÃO ESPAÇADA
+============================================================ */
+
+function getRecord(id){
+
+  if(!state.history[id]){
+
+    state.history[id]={
+      attempts:0,
+      correct:0,
+      wrong:0,
+      streak:0,
+      ease:2.5,
+      interval:0,
+      due:0,
+      lastAnswered:0,
+      confidence:0
+    };
+
+  }
+
+  return state.history[id];
+}
+
+
+function calculateInterval(record,isCorrect){
+
+  /*
+    Algoritmo simples de repetição espaçada.
+
+    Erro:
+      revisão muito próxima.
+
+    Acerto:
+      aumenta progressivamente o intervalo.
+
+    O fator ease é ajustado conforme desempenho.
+  */
+
+  if(!isCorrect){
+
+    record.ease=Math.max(
+      1.3,
+      (record.ease || 2.5)-0.25
+    );
+
+    record.interval=1;
+
+    return 1;
+  }
+
+  record.ease=Math.min(
+    3.2,
+    (record.ease || 2.5)+0.12
+  );
+
+  if(record.interval<=0){
+    record.interval=1;
+  }else if(record.interval===1){
+    record.interval=3;
+  }else{
+    record.interval=Math.max(
+      2,
+      Math.round(record.interval*record.ease)
+    );
+  }
+
+  return record.interval;
+}
+
+
+function updateSpacedRepetition(question,isCorrect){
+
+  const record=getRecord(question.id);
+
+  record.attempts++;
+
+  record.lastAnswered=Date.now();
+
+  if(isCorrect){
+
+    record.correct++;
+    record.streak++;
+    record.confidence=Math.min(
+      5,
+      record.confidence+1
+    );
+
+  }else{
+
+    record.wrong++;
+    record.streak=0;
+    record.confidence=Math.max(
+      0,
+      record.confidence-1
+    );
+  }
+
+  const days=calculateInterval(
+    record,
+    isCorrect
+  );
+
+  record.due=
+    Date.now()+
+    days*24*60*60*1000;
+
+  saveState();
+
+  return record;
+}
+
+
+/* ============================================================
+   SELEÇÃO INTELIGENTE
+============================================================ */
+
+function questionPriority(question){
+
+  const record=getRecord(question.id);
+
+  const now=Date.now();
+
+  let score=0;
+
+  /*
+    1. Questão atrasada para revisão.
+  */
+
+  if(record.due && record.due<=now){
+
+    const daysLate=
+      Math.min(
+        10,
+        Math.max(
+          0,
+          (now-record.due)/
+          (24*60*60*1000)
+        )
+      );
+
+    score+=70+(daysLate*5);
+  }
+
+  /*
+    2. Questão nunca vista.
+  */
+
+  if(record.attempts===0){
+
+    score+=35;
+
+  }else{
+
+    /*
+      3. Taxa de erro.
+    */
+
+    const accuracy=
+      record.correct/
+      Math.max(1,record.attempts);
+
+    score+=(1-accuracy)*55;
+
+    /*
+      4. Streak baixa.
+    */
+
+    score+=(5-Math.min(5,record.streak))*5;
+  }
+
+  /*
+    5. Dificuldade.
+  */
+
+  score+=question.difficulty*4;
+
+  /*
+    6. Evitar repetir imediatamente.
+  */
+
+  if(question.subject===state.lastSubject){
+
+    score-=8;
+  }
+
+  if(question.topic===state.lastTopic){
+
+    score-=12;
+  }
+
+  /*
+    7. Pequena aleatoriedade.
+    Evita que duas missões fiquem idênticas.
+  */
+
+  score+=Math.random()*12;
+
+  return score;
+}
+
+
+function selectMission(){
+
+  const available=
+    QUESTION_BANK
+      .map(q=>({
+        question:q,
+        score:questionPriority(q)
+      }))
+      .sort((a,b)=>b.score-a.score);
+
+  const selected=[];
+
+  const subjects={};
+
+  /*
+    Primeiro garante variedade de matérias.
+  */
+
+  for(const item of available){
+
+    const subject=item.question.subject;
+
+    if(!subjects[subject] && selected.length<6){
+
+      selected.push(item.question);
+      subjects[subject]=true;
+    }
+
+  }
+
+  /*
+    Depois completa com a seleção adaptativa.
+  */
+
+  for(const item of available){
+
+    if(selected.length>=12) break;
+
+    if(!selected.some(q=>q.id===item.question.id)){
+
+      selected.push(item.question);
+    }
+
+  }
+
+  /*
+    Em bancos pequenos, garante que a missão nunca fique vazia.
+  */
+
+  if(selected.length===0){
+
+    return QUESTION_BANK
+      .slice(0,12);
+
+  }
+
+  return selected;
+}
+
+
+/* ============================================================
+   MISSÃO
+============================================================ */
+
+function startMission(){
+
+  showPage("mission");
+
+  state.mission=selectMission();
+
+  state.missionIndex=0;
+  state.missionRunning=false;
+
+  saveState();
+
+  document.getElementById("missionIntro")
+    .classList.remove("hidden");
+
+  document.getElementById("questionArea")
+    .innerHTML="";
+
+  updateMissionProgress();
+}
+
+
+function beginMissionQuestions(){
+
+  if(!state.mission.length){
+
+    state.mission=selectMission();
+    state.missionIndex=0;
+  }
+
+  state.missionRunning=true;
+
+  document.getElementById("missionIntro")
+    .classList.add("hidden");
+
+  renderCurrentQuestion();
+}
+
+
+function updateMissionProgress(){
+
+  const total=state.mission.length||12;
+
+  const current=Math.min(
+    state.missionIndex,
+    total
+  );
+
+  const percentage=
+    total===0 ? 0 :
+    (current/total)*100;
+
+  document.getElementById("missionProgress")
+    .style.width=percentage+"%";
+
+  document.getElementById("missionCountHome")
+    .textContent=
+    current+"/12 questões da missão";
+
+  document.getElementById("homeProgress")
+    .style.width=percentage+"%";
+}
+
+
+function renderCurrentQuestion(){
+
+  updateMissionProgress();
+
+  const question=
+    state.mission[state.missionIndex];
+
+  if(!question){
+
+    finishMission();
+
+    return;
+  }
+
+  state.lastSubject=question.subject;
+  state.lastTopic=question.topic;
+
+  const area=
+    document.getElementById("questionArea");
+
+  area.innerHTML=`
+
+    <div class="question">
+
+      <div class="question-meta">
+
+        <span class="tag">
+          Questão ${state.missionIndex+1}/12
+        </span>
+
+        <span class="tag green">
+          AUTORAL • CEBRASPE
+        </span>
+
+        <span class="tag">
+          ${escapeHTML(question.subject)}
+        </span>
+
+        <span class="tag orange">
+          ${escapeHTML(question.topic)}
+        </span>
+
+      </div>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          style="width:${((state.missionIndex)/12)*100}%">
+        </div>
+      </div>
+
+      <div class="question-text">
+        ${escapeHTML(question.statement)}
+      </div>
+
+      <div class="answer-buttons">
+
+        <button
+          class="answer certo"
+          onclick="answerQuestion('C')">
+          ✅ CERTO
+        </button>
+
+        <button
+          class="answer errado"
+          onclick="answerQuestion('E')">
+          ❌ ERRADO
+        </button>
+
+      </div>
+
+      <div id="feedbackArea"></div>
+
+    </div>
+  `;
+}
+
+
+function answerQuestion(choice){
+
+  const question=
+    state.mission[state.missionIndex];
+
+  if(!question) return;
+
+  document.querySelectorAll(".answer")
+    .forEach(btn=>btn.disabled=true);
+
+  const isCorrect=
+    choice===question.answer;
+
+  const record=
+    updateSpacedRepetition(
+      question,
+      isCorrect
+    );
+
+  state.answered++;
+
+  if(isCorrect){
+
+    state.correct++;
+    state.points++;
+    state.streak++;
+
+    state.bestStreak=
+      Math.max(
+        state.bestStreak,
+        state.streak
+      );
+
+  }else{
+
+    /*
+      No padrão CEBRASPE, um item errado pode
+      representar penalização.
+
+      Aqui mantemos a lógica didática separada:
+      o ponto da missão é registrado apenas pelo acerto.
+    */
+
+    state.streak=0;
+  }
+
+  saveState();
+
+  renderFeedback(
+    question,
+    choice,
+    isCorrect,
+    record
+  );
+
+  renderHome();
+}
+
+
+function renderFeedback(
+  question,
+  choice,
+  isCorrect,
+  record
+){
+
+  const area=
+    document.getElementById("feedbackArea");
+
+  const nextDate=
+    new Date(record.due);
+
+  const formatted=
+    nextDate.toLocaleDateString(
+      "pt-BR",
+      {
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+      }
+    );
+
+  area.innerHTML=`
+
+    <div class="feedback ${isCorrect?"correct":"wrong"}">
+
+      <strong>
+        ${isCorrect ? "🎯 ACERTOU!" : "🧠 ERROU — vamos transformar isso em memória!"}
+      </strong>
+
+      <p>
+        <strong>Gabarito:</strong>
+        ${question.answer}
+      </p>
+
+      <p>
+        ${escapeHTML(question.explanation)}
+      </p>
+
+      <p>
+        <strong>🧠 Âncora de memória:</strong>
+        ${escapeHTML(question.memory)}
+      </p>
+
+      <div class="next-review">
+        🔁 Próxima revisão programada:
+        ${formatted}
+      </div>
+
+    </div>
+
+    <div class="actions" style="margin-top:16px">
+
+      <button
+        class="btn btn-light"
+        onclick="showPerformanceAfterQuestion()">
+        📊 Ver desempenho
+      </button>
+
+      <button
+        class="btn btn-yellow"
+        onclick="nextQuestion()">
+        ${state.missionIndex>=state.mission.length-1
+          ? "🏆 Finalizar missão"
+          : "Próxima questão ➜"}
+      </button>
+
+    </div>
+  `;
+}
+
+
+function nextQuestion(){
+
+  state.missionIndex++;
+
+  saveState();
+
+  renderCurrentQuestion();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+function finishMission(){
+
+  state.missionRunning=false;
+
+  saveState();
+
+  const area=
+    document.getElementById("questionArea");
+
+  document.getElementById("missionIntro")
+    .classList.add("hidden");
+
+  document.getElementById("missionProgress")
+    .style.width="100%";
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <span class="badge">
+        🏆 NASA COMPLETA
+      </span>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          style="width:100%">
+        </div>
+      </div>
+
+      <h2>Missão concluída!</h2>
+
+      <p class="muted">
+        <strong>12 questões concluídas.</strong>
+      </p>
+
+      <div class="notice">
+        O sistema já registrou seus acertos, erros,
+        desempenho por tema e próxima revisão.
+        Na próxima missão, a seleção será diferente
+        e priorizará o que você mais precisa.
+      </div>
+
+      <div class="actions" style="margin-top:18px">
+
+        <button
+          class="btn btn-primary"
+          onclick="startMission()">
+          🚀 Nova missão
+        </button>
+
+        <button
+          class="btn btn-light"
+          onclick="showPage('performance')">
+          📊 Ver desempenho
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  renderHome();
+}
+
+
+/* ============================================================
+   DESEMPENHO
+============================================================ */
+
+function calculateSubjectStats(){
+
+  const stats={};
+
+  QUESTION_BANK.forEach(q=>{
+
+    if(!stats[q.subject]){
+
+      stats[q.subject]={
+        total:0,
+        attempts:0,
+        correct:0,
+        wrong:0
+      };
+
+    }
+
+    stats[q.subject].total++;
+
+    const record=
+      state.history[q.id];
+
+    if(record){
+
+      stats[q.subject].attempts+=
+        record.attempts||0;
+
+      stats[q.subject].correct+=
+        record.correct||0;
+
+      stats[q.subject].wrong+=
+        record.wrong||0;
+    }
+
+  });
+
+  return stats;
+}
+
+
+function renderPerformance(){
+
+  const stats=
+    calculateSubjectStats();
+
+  const subjects=
+    Object.keys(stats);
+
+  let totalAttempts=0;
+  let totalCorrect=0;
+
+  subjects.forEach(subject=>{
+
+    totalAttempts+=
+      stats[subject].attempts;
+
+    totalCorrect+=
+      stats[subject].correct;
+  });
+
+  const accuracy=
+    totalAttempts
+      ? Math.round(
+          (totalCorrect/totalAttempts)*100
+        )
+      : 0;
+
+  document.getElementById("performanceSummary")
+    .innerHTML=`
+
+      <div class="grid">
+
+        <div class="stat">
+          <div class="number">${accuracy}%</div>
+          <div class="label">Aproveitamento</div>
+        </div>
+
+        <div class="stat">
+          <div class="number">${QUESTION_BANK.length}</div>
+          <div class="label">Questões no banco</div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:18px">
+
+        ${subjects.map(subject=>{
+
+          const s=stats[subject];
+
+          const acc=
+            s.attempts
+              ? Math.round(
+                  (s.correct/s.attempts)*100
+                )
+              : 0;
+
+          return `
+
+            <div class="subject">
+
+              <div class="subject-head">
+
+                <span class="subject-name">
+                  ${escapeHTML(subject)}
+                </span>
+
+                <strong>
+                  ${acc}%
+                </strong>
+
+              </div>
+
+              <div class="mini-bar">
+
+                <div
+                  class="mini-fill"
+                  style="width:${acc}%">
+                </div>
+
+              </div>
+
+              <p class="muted small">
+                ${s.correct} acertos /
+                ${s.attempts} respostas
+              </p>
+
+            </div>
+
+          `;
+
+        }).join("")}
+
+      </div>
+    `;
+
+
+  renderPriorities(stats);
+}
+
+
+function renderPriorities(stats){
+
+  const priority=[];
+
+  QUESTION_BANK.forEach(q=>{
+
+    const r=
+      state.history[q.id];
+
+    if(!r || !r.attempts){
+
+      priority.push({
+        question:q,
+        score:60
+      });
+
+      return;
+    }
+
+    const accuracy=
+      r.correct/
+      Math.max(1,r.attempts);
+
+    let score=
+      (1-accuracy)*100;
+
+    if(r.due && r.due<=Date.now()){
+
+      score+=50;
+    }
+
+    priority.push({
+      question:q,
+      score
+    });
+
+  });
+
+  priority.sort(
+    (a,b)=>b.score-a.score
+  );
+
+  const top=
+    priority.slice(0,6);
+
+  document.getElementById("priorityList")
+    .innerHTML=`
+
+      ${top.map(item=>`
+
+        <div class="subject">
+
+          <strong>
+            ${escapeHTML(item.question.subject)}
+          </strong>
+
+          <p class="muted small">
+            ${escapeHTML(item.question.topic)}
+          </p>
+
+          <span class="tag orange">
+            ${getRecord(item.question.id).attempts
+              ? "Precisa de reforço"
+              : "Ainda não estudada"}
+          </span>
+
+        </div>
+
+      `).join("")}
+
+    `;
+}
+
+
+function showPerformanceAfterQuestion(){
+
+  showPage("performance");
+
+}
+
+
+/* ============================================================
+   BANCO
+============================================================ */
+
+let activeFilter="Todos";
+
+
+function renderFilters(){
+
+  const subjects=[
+    "Todos",
+    ...new Set(
+      QUESTION_BANK.map(q=>q.subject)
+    )
+  ];
+
+  document.getElementById("filters")
+    .innerHTML=
+      subjects.map(subject=>`
+
+        <button
+          class="filter ${activeFilter===subject?"active":""}"
+          onclick="setBankFilter('${escapeAttribute(subject)}')">
+          ${escapeHTML(subject)}
+        </button>
+
+      `).join("");
+}
+
+
+function setBankFilter(subject){
+
+  activeFilter=subject;
+
+  renderBank();
+}
+
+
+function renderBank(){
+
+  renderFilters();
+
+  const list=
+    QUESTION_BANK.filter(q=>{
+
+      if(activeFilter==="Todos"){
+        return true;
+      }
+
+      return q.subject===activeFilter;
+
+    });
+
+  document.getElementById("bankList")
+    .innerHTML=
+      list.map(q=>{
+
+        const r=getRecord(q.id);
+
+        const accuracy=
+          r.attempts
+            ? Math.round(
+                (r.correct/r.attempts)*100
+              )
+            : null;
+
+        return `
+
+          <div class="bank-item">
+
+            <strong>
+              ${escapeHTML(q.subject)}
+              • ${escapeHTML(q.topic)}
+            </strong>
+
+            <span class="tag orange">
+              Dificuldade ${q.difficulty}
+            </span>
+
+            <p class="muted">
+              ${escapeHTML(q.statement)}
+            </p>
+
+            <div class="small muted">
+
+              ${r.attempts
+                ? `Respondida ${r.attempts}x • Aproveitamento ${accuracy}%`
+                : "Ainda não respondida"}
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+}
+
+
+/* ============================================================
+   HOME
+============================================================ */
+
+function renderHome(){
+
+  document.getElementById("statPoints")
+    .textContent=state.points;
+
+  document.getElementById("statCorrect")
+    .textContent=state.correct;
+
+  document.getElementById("statAnswered")
+    .textContent=state.answered;
+
+  document.getElementById("statStreak")
+    .textContent=state.streak;
+
+  const total=
+    state.mission.length||12;
+
+  const completed=
+    Math.min(
+      state.missionIndex,
+      total
+    );
+
+  const percent=
+    total
+      ? (completed/total)*100
+      : 0;
+
+  document.getElementById("homeProgress")
+    .style.width=percent+"%";
+
+  document.getElementById("missionCountHome")
+    .textContent=
+      completed+"/12 questões da missão";
+}
+
+
+/* ============================================================
+   UTILITÁRIOS
+============================================================ */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+function escapeAttribute(value){
+
+  return String(value)
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+}
+
+
+/* ============================================================
+   INICIALIZAÇÃO
+============================================================ */
+
+loadState();
+
+renderHome();
+
+renderPerformance();
+
+renderBank();
+
+</script>
+
+</body>
+</html>
