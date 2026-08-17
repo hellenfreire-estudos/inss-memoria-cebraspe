@@ -3,860 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1f3a">
+<meta name="theme-color" content="#07182d">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="manifest" href="manifest.json">
-
-<title>INSS Memória NASA 🚀</title>
-
-<link rel="icon" type="image/png" href="nasa-icon.png">
-<link rel="apple-touch-icon" href="nasa-icon.png">
-
+<meta name="apple-mobile-web-app-title" content="INSS Memória NASA">
+<title>🚀 INSS Memória NASA</title>
 <style>
-:root{
-  --navy:#0b1f3a;
-  --blue:#1769aa;
-  --cyan:#00a8cc;
-  --bg:#eef3f8;
-  --card:#fff;
-  --text:#122033;
-  --muted:#687789;
-  --ok:#16834b;
-  --bad:#c62828;
-  --gold:#f5b700;
-  --line:#dbe3ec
-}
-
-*{
-  box-sizing:border-box
-}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
-}
-
-button{
-  font:inherit;
-  cursor:pointer;
-  border:0
-}
-
-.header{
-  background:linear-gradient(135deg,#07182d,#164d76);
-  color:#fff;
-  padding:25px 17px;
-  text-align:center
-}
-
-.header h1{
-  margin:0;
-  font-size:28px
-}
-
-.header p{
-  margin:8px 0 0
-}
-
-.wrap{
-  max-width:820px;
-  margin:auto;
-  padding:15px
-}
-
-.tabs{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin-bottom:14px
-}
-
-.tab{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:11px 5px;
-  color:var(--muted);
-  font-weight:800
-}
-
-.tab.active{
-  background:var(--navy);
-  color:#fff
-}
-
-.card{
-  background:var(--card);
-  border-radius:21px;
-  padding:19px;
-  margin-bottom:14px;
-  box-shadow:0 7px 22px #0b1f3a12
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-  flex-wrap:wrap
-}
-
-.badge{
-  display:inline-block;
-  background:#e8f5ff;
-  color:#075b92;
-  border-radius:999px;
-  padding:6px 10px;
-  font-size:12px;
-  font-weight:800
-}
-
-.muted{
-  color:var(--muted)
-}
-
-.primary{
-  background:var(--blue);
-  color:#fff;
-  border-radius:14px;
-  padding:13px 17px;
-  font-weight:800
-}
-
-.secondary{
-  background:#fff;
-  color:var(--text);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:12px 16px;
-  font-weight:800
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-top:14px
-}
-
-.stat{
-  background:#f2f6fa;
-  border-radius:15px;
-  text-align:center;
-  padding:11px
-}
-
-.stat b{
-  display:block;
-  font-size:24px
-}
-
-.progress{
-  height:10px;
-  background:#dce5ee;
-  border-radius:10px;
-  overflow:hidden;
-  margin:14px 0
-}
-
-.bar{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--cyan),#45d7b2);
-  transition:.3s
-}
-
-.question{
-  font-size:20px;
-  line-height:1.45;
-  margin:17px 0;
-  font-weight:700
-}
-
-.choice{
-  display:block;
-  width:100%;
-  text-align:left;
-  background:#fff;
-  border:2px solid var(--line);
-  border-radius:15px;
-  padding:14px;
-  margin:8px 0;
-  font-weight:800
-}
-
-.choice.correct{
-  border-color:var(--ok);
-  background:#eaf8f0
-}
-
-.choice.wrong{
-  border-color:var(--bad);
-  background:#fff0f0
-}
-
-.feedback{
-  border-left:5px solid var(--gold);
-  background:#fff9e6;
-  border-radius:11px;
-  padding:13px;
-  line-height:1.45;
-  margin-top:12px
-}
-
-.hidden{
-  display:none!important
-}
-
-.grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-.topic{
-  background:#f3f7fa;
-  border-radius:15px;
-  padding:13px
-}
-
-.meter{
-  height:8px;
-  background:#e2e9ef;
-  border-radius:8px;
-  margin:8px 0;
-  overflow:hidden
-}
-
-.meter span{
-  display:block;
-  height:100%;
-  background:#2c9cdb;
-  width:0
-}
-
-.timer{
-  text-align:center;
-  font-size:38px;
-  font-weight:900;
-  margin:8px
-}
-
-.alert{
-  border:1px solid #d9e5ef;
-  background:#f7fbfe;
-  border-radius:15px;
-  padding:13px;
-  margin-top:9px
-}
-
-.notice{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.45
-}
-
-@media(max-width:560px){
-
-  .stats{
-    grid-template-columns:repeat(2,1fr)
-  }
-
-  .grid2{
-    grid-template-columns:1fr
-  }
-
-  .question{
-    font-size:18px
-  }
-
-  .tabs{
-    grid-template-columns:repeat(2,1fr)
-  }
-}
+:root{--n:#07182d;--b:#1769aa;--c:#00a8cc;--bg:#eef3f8;--card:#fff;--t:#122033;--m:#687789;--ok:#16834b;--bad:#c62828;--g:#f5b700;--l:#dbe3ec}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit;border:0;cursor:pointer}.header{background:linear-gradient(135deg,var(--n),var(--b));color:#fff;text-align:center;padding:24px 16px}.header h1{margin:0;font-size:27px}.header p{margin:7px 0 0}
+.wrap{max-width:760px;margin:auto;padding:14px 14px 100px}.card{background:var(--card);border:1px solid var(--l);border-radius:18px;padding:17px;margin:12px 0;box-shadow:0 7px 20px #07182d12}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{text-align:center;padding:10px 4px;border:1px solid var(--l);border-radius:14px;background:#fff}.stat b{display:block;font-size:20px}.stat span{font-size:11px;color:var(--m)}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#e8f3fb;color:var(--b);font-size:11px;font-weight:800;margin:2px}.author{background:#e8f6ee;color:var(--ok)}.official{background:#fff4cf;color:#765900}
+.progress{height:9px;background:#dce5ee;border-radius:20px;overflow:hidden;margin:10px 0}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c),var(--b))}
+h2{font-size:20px;margin:5px 0 9px}.muted,.source{color:var(--m)}.small{font-size:12px;line-height:1.45}.q{font-size:18px;line-height:1.45;font-weight:650;margin:16px 0}.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{padding:15px;border:2px solid var(--l);border-radius:14px;background:#f4f7fa;font-weight:800}.choice.correct{border-color:var(--ok);background:#e8f6ee}.choice.wrong{border-color:var(--bad);background:#fdecec}
+.explain{margin-top:12px;padding:12px;border-left:4px solid var(--b);background:#f6f8fb;border-radius:10px;line-height:1.45}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:12px 15px;border-radius:12px;background:var(--b);color:#fff;font-weight:800}.btn.alt{background:#e8eef5;color:var(--n)}.btn.gold{background:var(--g);color:#241d00}.btn.danger{background:var(--bad)}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--l);display:flex;justify-content:center;gap:2px;padding:7px 2px calc(7px + env(safe-area-inset-bottom));z-index:5}.nav button{background:transparent;color:var(--m);padding:6px 9px;border-radius:10px;font-size:11px}.nav button.active{color:var(--b);background:#edf6fc;font-weight:800}
+.hidden{display:none!important}.topic{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--l)}.bar{width:105px;height:8px;background:#e1e8ef;border-radius:10px;overflow:hidden}.bar i{display:block;height:100%;background:var(--b)}.link{color:var(--b);font-weight:750;text-decoration:none}.alert{padding:11px;background:#fff8df;border-radius:12px;color:#654d00;font-size:13px}
+@media(max-width:430px){.stats{grid-template-columns:repeat(2,1fr)}.choices{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-
-<header class="header">
-
-<h1>🚀 INSS Memória NASA</h1>
-
-<p>
-Missão: aprovação • 30 minutos por dia • CEBRASPE
-</p>
-
-</header>
-
+<header class="header"><h1>🚀 INSS Memória NASA</h1><p>Missão aprovação • 30 minutos • CEBRASPE • revisão inteligente</p></header>
 <main class="wrap">
 
-<div class="tabs">
-
-<button class="tab active" onclick="tab('mission',this)">
-🎯 Missão
-</button>
-
-<button class="tab" onclick="tab('memory',this)">
-🧠 Memória
-</button>
-
-<button class="tab" onclick="tab('panel',this)">
-📊 Painel
-</button>
-
-<button class="tab" onclick="tab('alerts',this)">
-🔔 Alertas
-</button>
-
-</div>
-
-
-<!-- =========================
-     MISSÃO
-========================= -->
-
-<section id="mission" class="page">
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<span class="badge">
-MISSÃO DE HOJE
-</span>
-
-<h2>
-5 questões estratégicas
-</h2>
-
-<p class="muted">
-Banco robusto • sem repetição desnecessária • erros voltam para fixação;<br>Erros aumentam a prioridade do assunto;
-acertos consistentes reduzem a frequência.
-</p>
-
-</div>
-
-<button class="primary" onclick="startMission()">
-🚀 Começar
-</button>
-
-</div>
-
-
-<div class="progress">
-<div id="progress" class="bar"></div>
-</div>
-
-
+<section id="home">
 <div class="stats">
-
-<div class="stat">
-<b id="points">0</b>
-Pontos
+<div class="stat"><b id="score">0</b><span>Pontos</span></div><div class="stat"><b id="correct">0</b><span>Acertos</span></div>
+<div class="stat"><b id="total">0</b><span>Respondidas</span></div><div class="stat"><b id="streak">0</b><span>Sequência</span></div>
 </div>
-
-<div class="stat">
-<b id="hits">0</b>
-Acertos
-</div>
-
-<div class="stat">
-<b id="errors">0</b>
-Erros
-</div>
-
-<div class="stat">
-<b id="streak">0</b>
-Sequência
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card hidden" id="questionCard">
-
-<div class="row">
-
-<span id="subject" class="badge"></span><span id="sourceBadge" class="badge">NASA AUTORAL</span>
-
-<span id="counter" class="muted"></span>
-
-</div>
-
-
-<div id="question" class="question"></div>
-
-<div id="choices"></div>
-
-<div id="feedback" class="hidden"></div>
-
-<button
-id="next"
-class="primary hidden"
-onclick="nextQuestion()">
-
-Próxima ➜
-
-</button>
-
-</div>
-
-
 <div class="card">
-
-<h2>
-🧠 Como a NASA aprende
-</h2>
-
-<p>
-O sistema guarda seu desempenho no aparelho
-e usa erros e acertos para definir a prioridade
-das próximas questões.
-</p>
-
-<p class="notice">
-
-A NASA combina banco autoral com o índice de itens oficiais CEBRASPE disponíveis.
-Questões oficiais com texto integral só entram quando o respectivo caderno oficial é fornecido como fonte de importação.
-
-O motor adapta a frequência: erro aumenta prioridade; acerto consistente aumenta intervalo.
-
-</p>
-
+<span class="badge">🧠 MISSÃO ADAPTATIVA</span><h2>Atacar o que você mais precisa.</h2>
+<p class="muted">Errou um tema? Ele ganha prioridade. Dominou? A frequência diminui.</p>
+<div class="progress"><i id="missionProgress"></i></div><p><b id="missionText">0/12 questões da missão</b></p>
+<div class="btnrow"><button class="btn" onclick="start()">🚀 Iniciar missão</button><button class="btn alt" onclick="show('dash')">📊 Desempenho</button></div>
+<div class="alert">Padrão CEBRASPE: julgue cada item como <b>Certo (C)</b> ou <b>Errado (E)</b>.</div>
 </div>
-
+<div class="card"><h3>📚 Banco robusto</h3>
+<p class="small">Esta versão traz <b>itens autorais no padrão CEBRASPE</b> e separa as fontes oficiais para consulta. Não reproduzimos integralmente questões protegidas; o texto original deve ser conferido nos cadernos oficiais.</p>
+<a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/ED_1_INSS_22_ABERTURA.PDF">📄 Edital oficial INSS/CEBRASPE</a><br><br>
+<a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/1491CB8F34C7698D6813AEDFC36196C9ED25F9ED2CD0FDEF7BF3442605FBFFA5.pdf">📘 Caderno oficial CEBRASPE</a>
+</div>
 </section>
 
-
-<!-- =========================
-     MEMÓRIA
-========================= -->
-
-<section id="memory" class="page hidden">
-
-<div class="card">
-
-<h2>
-🧠 Mapa de memória
-</h2>
-
-<div id="memoryGrid" class="grid2"></div>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-🔄 Ciclo NASA
-</h3>
-
-<p>
-<b>
-Responder → corrigir → entender →
-reforçar → revisar.
-</b>
-</p>
-
-<p class="muted">
-O erro vira sinal para o algoritmo,
-não motivo para desanimar.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     PAINEL
-========================= -->
-
-<section id="panel" class="page hidden">
-
-<div class="card">
-
-<h2>
-📊 Desempenho
-</h2>
-
-
-<div class="stats">
-
-<div class="stat">
-<b id="total">0</b>
-Questões
-</div>
-
-<div class="stat">
-<b id="accuracy">0%</b>
-Precisão
-</div>
-
-<div class="stat">
-<b id="best">0</b>
-Melhor sequência
-</div>
-
-<div class="stat">
-<b id="level">1</b>
-Nível
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-⏱️ Sprint de 30 minutos
-</h3>
-
-<div id="timer" class="timer">
-30:00
-</div>
-
-
-<div class="row">
-
-<button
-class="primary"
-onclick="toggleTimer()"
-id="timerBtn">
-
-Iniciar
-
-</button>
-
-<button
-class="secondary"
-onclick="resetTimer()">
-
-Reiniciar
-
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     ALERTAS
-========================= -->
-
-<section id="alerts" class="page hidden">
-
-<div class="card">
-
-<h2>
-🔔 Central de Alertas
-</h2>
-
-<p>
-Os horários planejados para a sua rotina:
-</p>
-
-
-<div class="alert">
-
-🌅 <b>08:15</b>
-
-— missão rápida no trajeto
-para o trabalho
-
-</div>
-
-
-<div class="alert">
-
-☀️ <b>12:30</b>
-
-— revisão-relâmpago
-
-</div>
-
-
-<div class="alert">
-
-🌆 <b>18:40</b>
-
-— missão no retorno para casa
-
-</div>
-
-
-<div class="alert">
-
-🌙 <b>20:00</b>
-
-— missão principal de 30 minutos
-
-</div>
-
-
-<br>
-
-
-<button
-class="primary"
-onclick="requestNotifications()">
-
-🔔 Ativar notificações neste aparelho
-
-</button>
-
-
-<p id="notificationStatus" class="notice"></p>
-
-<div class="card" style="margin-top:12px;background:#f7fbff">
-<h3>⚙️ Configuração do Push</h3>
-<p class="muted">Sem OneSignal. O NASA usa Web Push padrão. Você só precisa colar a URL do pequeno servidor de Push e a chave pública VAPID.</p>
-<label>URL do servidor Push</label>
-<input id="pushApi" placeholder="https://seu-worker.exemplo.workers.dev" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;margin:6px 0 10px">
-<label>Chave pública VAPID</label>
-<input id="pushPublicKey" placeholder="B..." style="width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;margin:6px 0 10px">
-<div class="row">
-<button class="primary" onclick="savePushConfig()">💾 Salvar configuração</button>
-<button class="primary" onclick="nasaPushTest()">🚀 Enviar teste</button>
-</div>
-</div>
-
-
-<p class="notice"><b>Como funciona:</b> o NASA decide o que revisar; o Web Push apenas entrega a notificação na tela do iPhone. Para receber avisos com o app fechado, o PWA precisa estar instalado na Tela de Início e inscrito no Push.</p>
-
-</div>
-
-</section>
-
-<div class="card"><h3>🏛️ Banco CEBRASPE — referência oficial</h3><p class="notice">A NASA separa questões autorais das questões oficiais. O índice oficial mantém prova, item, gabarito quando disponível e fonte oficial. O texto integral das questões da banca deve ser consultado no documento do Cebraspe.</p><p class="notice">A base autoral é estruturada pelo edital de 2022; a prova oficial de 2026 fica separada para não misturar automaticamente conteúdos de períodos distintos.</p></div></main>
-
+<section id="mission" class="hidden"><div class="card">
+<div id="meta"></div><div class="progress"><i id="qprogress"></i></div><div class="q" id="question"></div>
+<div class="choices"><button class="choice" id="C" onclick="answer('C')">✅ CERTO</button><button class="choice" id="E" onclick="answer('E')">❌ ERRADO</button></div>
+<div id="feedback"></div><div class="btnrow" style="margin-top:12px"><button class="btn alt" onclick="show('home')">⏸ Pausar</button><button id="next" class="btn gold hidden" onclick="next()">Próximo ➜</button></div>
+</div></section>
+
+<section id="dash" class="hidden"><div class="card"><h2>📊 Painel NASA</h2><p class="muted">Prioridade calculada pelo seu histórico local.</p><div id="topics"></div></div>
+<div class="card"><h3>🧠 Motor adaptativo</h3><p class="small">Erros recentes pesam mais; acertos consistentes reduzem a prioridade. Isso organiza sua revisão — não é uma previsão de prova.</p><button class="btn danger" onclick="resetData()">Zerar histórico</button></div></section>
+
+<section id="bank" class="hidden"><div class="card"><h2>📚 Banco</h2><p class="muted">Itens autorais para treino C/E.</p><div id="bankList"></div></div></section>
+
+<section id="sources" class="hidden"><div class="card"><h2>🔎 Fontes oficiais</h2>
+<p><a class="link" target="_blank" href="https://www.cebraspe.org.br/o-que-fazemos/concurso/">CEBRASPE — concursos</a></p>
+<p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/ED_1_INSS_22_ABERTURA.PDF">Edital INSS 2022</a></p>
+<p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/1491CB8F34C7698D6813AEDFC36196C9ED25F9ED2CD0FDEF7BF3442605FBFFA5.pdf">Caderno oficial</a></p>
+<p><a class="link" target="_blank" href="https://cdn.cebraspe.org.br/concursos/inss_22/arquivos/INSS_22_EXCETO_GEX_GUARULHOS_JUSTIFICATIVAS_DE_ALTERAES_DE_GABARITO.PDF">Justificativas de alterações/anulações</a></p>
+<p class="small muted">O conteúdo deve ser atualizado quando houver novo edital.</p></div></section>
+</main>
+
+<nav class="nav"><button id="n0" class="active" onclick="show('home')">🏠<br>Início</button><button id="n1" onclick="start()">🚀<br>Missão</button><button id="n2" onclick="show('dash')">📊<br>Desempenho</button><button id="n3" onclick="show('bank')">📚<br>Banco</button><button id="n4" onclick="show('sources')">🔎<br>Fontes</button></nav>
 
 <script>
-/* =========================
-   NASA — MOTOR ADAPTATIVO
-   Banco externo: questions.json
-   ========================= */
-let bank=[];
-let subjects=[];
-let mission=[];
-let idx=0;
-let answered=false;
-let timerId=null;
-let secs=1800;
+const Q=[
+["Direito Previdenciário","A seguridade social compreende saúde, previdência social e assistência social.","C","É a estrutura constitucional da seguridade social."],
+["Direito Previdenciário","No RGPS, a filiação é facultativa para todos os trabalhadores que exercem atividade remunerada.","E","Quem se enquadra como segurado obrigatório tem filiação obrigatória; facultativo é outra categoria."],
+["Direito Previdenciário","O salário-maternidade integra, em regra, os benefícios do RGPS.","C","É benefício previsto na legislação previdenciária."],
+["Direito Previdenciário","O auxílio-reclusão é pago ao segurado preso, independentemente dos requisitos legais.","E","A proteção é destinada aos dependentes do segurado de baixa renda, observados os requisitos."],
+["Direito Previdenciário","A assistência social é prestada a quem dela necessitar, independentemente de contribuição.","C","A assistência social é política de seguridade de caráter não contributivo."],
+["Direito Previdenciário","A saúde depende de contribuição prévia do usuário para ser assegurada pelo Estado.","E","Saúde é direito de todos e dever do Estado; não depende de contribuição prévia."],
+["Direito Constitucional","Legalidade, impessoalidade, moralidade, publicidade e eficiência estão expressamente no art. 37 da Constituição.","C","São os cinco princípios do caput do art. 37."],
+["Direito Constitucional","A administração pode agir contra a lei se entender que o resultado atende melhor ao interesse público.","E","A finalidade pública não autoriza violar a legalidade."],
+["Direito Administrativo","Anulação está ligada à ilegalidade; revogação, em regra, à conveniência e oportunidade.","C","Essa é a distinção clássica entre os institutos."],
+["Direito Administrativo","Todo ato administrativo ilegal deve ser revogado pela própria administração.","E","Ilegalidade conduz à anulação; revogação trata do mérito."],
+["Língua Portuguesa","Clareza, precisão, objetividade e concisão são características desejáveis da redação oficial.","C","A comunicação oficial deve evitar ambiguidades e excessos."],
+["Língua Portuguesa","Uma informação não autorizada pelo texto pode ser considerada correta apenas por ser compatível com conhecimento externo.","E","A interpretação deve respeitar o texto e o comando."],
+["Informática","Phishing pode usar mensagens ou páginas falsas para induzir o usuário a entregar dados.","C","É uma forma comum de fraude por engenharia social."],
+["Informática","HTTPS, sozinho, garante que um site é legítimo e elimina qualquer risco de fraude.","E","HTTPS protege a comunicação, mas não prova a legitimidade do site."],
+["Ética no Serviço Público","O servidor deve orientar sua atuação pelo interesse público e pelos deveres funcionais.","C","A atuação pública é vinculada a princípios e deveres."],
+["Ética no Serviço Público","A finalidade pública autoriza o servidor a ignorar regras de conduta quando acredita que o resultado será melhor.","E","Interesse público não autoriza descumprir normas."],
+["Direito Previdenciário","O RGPS possui caráter contributivo e filiação obrigatória, observadas as hipóteses legais.","C","É característica central do regime."],
+["Direito Previdenciário","O segurado facultativo pode filiar-se sem atender aos requisitos legais dessa modalidade.","E","A filiação facultativa também depende de requisitos legais."],
+["Direito Previdenciário","A pensão por morte protege dependentes do segurado, conforme os requisitos legais.","C","É benefício voltado à proteção dos dependentes."],
+["Direito Previdenciário","A qualidade de segurado é irrelevante para qualquer benefício do RGPS.","E","Ela é relevante para diversos benefícios, ressalvadas as hipóteses legais."],
+["INSS e Atendimento","As atividades do Técnico do Seguro Social incluem ações relacionadas ao reconhecimento de direitos previdenciários.","C","Essa atribuição consta da descrição do cargo no edital de 2022."],
+["INSS e Atendimento","O atendimento digital elimina a necessidade de observar regras administrativas do INSS.","E","Canal digital não afasta requisitos e procedimentos."],
+["Raciocínio Lógico","A negação de 'todos os servidores estudam' é 'nenhum servidor estuda'.","E","A negação é: existe pelo menos um servidor que não estuda."],
+["Raciocínio Lógico","A proposição 'se A, então B' é falsa somente quando A é verdadeira e B é falsa.","C","Essa é a condição de falsidade da implicação material."]
+];
 
-const KEY="NASA_v3_state";
-let st=JSON.parse(localStorage.getItem(KEY)||"null")||{
-  total:0,hits:0,errors:0,points:0,streak:0,best:0,
-  subjects:{},history:{}
-};
-
-function save(){
-  localStorage.setItem(KEY,JSON.stringify(st));
-  update();
-}
-
-function ensureSubject(s){
-  if(!st.subjects[s]) st.subjects[s]={hits:0,errors:0,priority:1};
-}
-
-function daysSince(ts){
-  return ts ? (Date.now()-ts)/86400000 : 999;
-}
-
-function priorityScore(q){
-  const h=st.history[q.id]||{wrong:0,right:0,last:0,interval:0};
-  const days=daysSince(h.last);
-  let score=(h.wrong*8)+(q.peso_prioridade||1.5);
-  if(!h.last) score+=4;
-  if(days>=Math.max(1,h.interval||1)) score+=Math.min(days,14);
-  else score-=5;
-  score-=Math.min(h.right||0,5);
-  return score;
-}
-
-function buildMission(){
-  if(!bank.length) return;
-  mission=[...bank]
-    .sort((a,b)=>priorityScore(b)-priorityScore(a) || Math.random()-.5)
-    .slice(0,5);
-  idx=0;
-  answered=false;
-}
-
-function startMission(){
-  buildMission();
-  questionCard.classList.remove("hidden");
-  renderQuestion();
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function renderQuestion(){
-  if(!mission.length) return;
-  const x=mission[idx];
-  subject.textContent=x.disciplina;
-  counter.textContent=`Questão ${idx+1} de ${mission.length}`;
-  sourceBadge.textContent="NASA AUTORAL";
-  question.textContent=x.enunciado;
-  progress.style.width=(idx/mission.length*100)+"%";
-  feedback.className="hidden";
-  next.classList.add("hidden");
-  answered=false;
-  choices.innerHTML='<button class="choice" onclick="answer(\'C\',this)">CERTO</button>'+
-                    '<button class="choice" onclick="answer(\'E\',this)">ERRADO</button>';
-}
-
-function answer(v,btn){
-  if(answered) return;
-  answered=true;
-  const x=mission[idx];
-  const ok=v===x.gabarito;
-  const h=st.history[x.id]||{wrong:0,right:0,last:0,interval:0};
-
-  document.querySelectorAll(".choice").forEach((b,n)=>{
-    if((n===0?"C":"E")===x.gabarito) b.classList.add("correct");
-  });
-  if(!ok) btn.classList.add("wrong");
-
-  st.total++;
-  ensureSubject(x.disciplina);
-  h.last=Date.now();
-
-  if(ok){
-    st.hits++; st.points+=10; st.streak++;
-    st.best=Math.max(st.best,st.streak);
-    st.subjects[x.disciplina].hits++;
-    st.subjects[x.disciplina].priority=Math.max(.5,st.subjects[x.disciplina].priority-.25);
-    h.right=(h.right||0)+1;
-    h.interval=Math.min(30,Math.max(2,(h.interval||1)*1.8));
-  }else{
-    st.errors++; st.points=Math.max(0,st.points-2); st.streak=0;
-    st.subjects[x.disciplina].errors++;
-    st.subjects[x.disciplina].priority+=1.25;
-    h.wrong=(h.wrong||0)+1;
-    h.interval=1;
-    if(typeof nasaScheduleErrorReview==="function") nasaScheduleErrorReview(x);
-  }
-
-  st.history[x.id]=h;
-  feedback.className="feedback";
-  feedback.innerHTML=`<b>${ok?"🎯 ACERTOU!":"🧠 ERRO ESTRATÉGICO!"}</b><br>${x.explicacao}<br><br><span class="notice">${ok?"Memória consolidada; intervalo ampliado.":"Assunto e questão priorizados para recuperação."}</span>`;
-  next.classList.remove("hidden");
-  save();
-}
-
-function nextQuestion(){
-  if(idx<mission.length-1){idx++;renderQuestion();return;}
-  progress.style.width="100%";
-  question.textContent="🚀 MISSÃO CONCLUÍDA!";
-  choices.innerHTML="";
-  next.classList.add("hidden");
-  feedback.className="feedback";
-  feedback.innerHTML=`Missão concluída. <b>${st.hits} acertos</b> e <b>${st.errors} erros</b> acumulados.`;
-  save();
-}
-
-function update(){
-  points.textContent=st.points;
-  hits.textContent=st.hits;
-  errors.textContent=st.errors;
-  streak.textContent=st.streak;
-  total.textContent=st.total;
-  accuracy.textContent=st.total?Math.round(st.hits/st.total*100)+"%":"0%";
-  best.textContent=st.best;
-  level.textContent=Math.max(1,1+Math.floor(st.points/100));
-  renderMemory();
-}
-
-function renderMemory(){
-  memoryGrid.innerHTML=subjects.map(s=>{
-    ensureSubject(s);
-    const x=st.subjects[s];
-    const score=Math.max(0,Math.min(100,50+x.hits*8-x.errors*12));
-    return `<div class="topic"><b>${s}</b><div class="meter"><span style="width:${score}%"></span></div><small>${x.hits} acertos • ${x.errors} erros • prioridade ${x.priority.toFixed(1)}</small></div>`;
-  }).join("");
-}
-
-function tab(id,btn){
-  document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  btn.classList.add("active");
-}
-
-async function requestNotifications(){
-  const out=document.getElementById("notificationStatus");
-  if(!("Notification" in window)){out.textContent="Este navegador não disponibiliza a API de notificações nesta página.";return;}
-  try{
-    const p=await Notification.requestPermission();
-    out.textContent=p==="granted"?"✅ Permissão concedida neste navegador.":"⚠️ Permissão não concedida.";
-  }catch(e){out.textContent="Não foi possível solicitar a permissão neste momento.";}
-}
-
-function draw(){
-  timer.textContent=String(Math.floor(secs/60)).padStart(2,"0")+":"+String(secs%60).padStart(2,"0");
-}
-function toggleTimer(){
-  if(timerId){clearInterval(timerId);timerId=null;timerBtn.textContent="Continuar";return;}
-  timerBtn.textContent="Pausar";
-  timerId=setInterval(()=>{if(secs<=0){clearInterval(timerId);timerId=null;timerBtn.textContent="Concluído 🎯";return;}secs--;draw();},1000);
-}
-function resetTimer(){clearInterval(timerId);timerId=null;secs=1800;draw();timerBtn.textContent="Iniciar";}
-
-function saveSlots(){
-  ["s1","s2","s3","s4"].forEach(x=>localStorage.setItem("nasa_"+x,document.getElementById(x).value));
-  document.getElementById("saved").textContent="Horários salvos neste aparelho.";
-  if(typeof nasaScheduleFixedTimes==="function") nasaScheduleFixedTimes();
-}
-
-async function init(){
-  ["s1","s2","s3","s4"].forEach(x=>{let v=localStorage.getItem("nasa_"+x);if(v)document.getElementById(x).value=v;});
-  try{
-    const r=await fetch("questions.json",{cache:"no-store"});
-    bank=await r.json();
-    subjects=[...new Set(bank.map(x=>x.disciplina))];
-    subjects.forEach(ensureSubject);
-    buildMission();
-    update();
-    draw();
-  }catch(e){
-    question.textContent="Não foi possível carregar o banco de questões. Verifique se questions.json foi publicado junto com o index.html.";
-    draw();
-  }
-  if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
-  loadPushConfig();
-}
-init();
-
-function savePushConfig(){
-  localStorage.setItem('NASA_PUSH_API',document.getElementById('pushApi').value.trim());
-  localStorage.setItem('NASA_VAPID_PUBLIC_KEY',document.getElementById('pushPublicKey').value.trim());
-  document.getElementById('notificationStatus').textContent='✅ Configuração salva. Agora toque em “Ativar notificações neste aparelho”.';
-}
-function loadPushConfig(){
-  document.getElementById('pushApi').value=localStorage.getItem('NASA_PUSH_API')||'';
-  document.getElementById('pushPublicKey').value=localStorage.getItem('NASA_VAPID_PUBLIC_KEY')||'';
-}
-
+let S=JSON.parse(localStorage.getItem("nasaINSS")||"null")||{score:0,correct:0,total:0,streak:0,done:0,hist:{},session:[],pos:0};
+const save=()=>{localStorage.setItem("nasaINSS",JSON.stringify(S));stats()};
+function stats(){score.textContent=S.score;correct.textContent=S.correct;total.textContent=S.total;streak.textContent=S.streak;missionText.textContent=S.done+"/12 questões da missão";missionProgress.style.width=Math.min(12,S.done)/12*100+"%"}
+function show(id){document.querySelectorAll("main section").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));let m={home:"n0",mission:"n1",dash:"n2",bank:"n3",sources:"n4"};if(m[id])document.getElementById(m[id]).classList.add("active");if(id==="dash")renderDash();if(id==="bank")renderBank();scrollTo(0,0)}
+function pri(i){let h=S.hist[i]||{c:0,e:0,last:0},a=h.c+h.e,acc=a?h.c/a:0,days=h.last?(Date.now()-h.last)/86400000:99;return h.e*5+(1-acc)*3+Math.min(days,6)*.35+(a?0:4)}
+function start(){let a=Q.map((q,i)=>({q,i,p:pri(i)})).sort((x,y)=>y.p-x.p),out=[],topics=new Set();while(out.length<12&&a.length){let k=a.findIndex(x=>!topics.has(x.q[0]));if(k<0)k=0;let x=a.splice(k,1)[0];out.push(x.i);topics.add(x.q[0])}while(out.length<12&&a.length)out.push(a.shift().i);S.session=out;S.pos=0;show("mission");renderQ()}
+function renderQ(){let i=S.session[S.pos],q=Q[i];meta.innerHTML='<span class="badge">Questão '+(S.pos+1)+'/12</span><span class="badge author">AUTORAL • CEBRASPE</span><span class="badge">'+q[0]+'</span>';qprogress.style.width=S.pos/12*100+"%";question.textContent=q[1];feedback.innerHTML="";C.className=E.className="choice";C.disabled=E.disabled=false;next.classList.add("hidden")}
+function answer(a){let i=S.session[S.pos],q=Q[i],ok=a===q[2],h=S.hist[i]||{c:0,e:0,last:0};h[ok?"c":"e"]++;h.last=Date.now();S.hist[i]=h;S.total++;ok?(S.correct++,S.score++,S.streak++):(S.score--,S.streak=0);S.done=Math.min(12,S.done+1);save();document.getElementById(a).classList.add(ok?"correct":"wrong");C.disabled=E.disabled=true;feedback.innerHTML='<div class="explain"><b>'+(ok?"🎯 ACERTOU!":"🧠 ERROU — o sistema vai reforçar este tema.")+'</b><br>'+q[3]+'<br><span class="small">Gabarito: <b>'+q[2]+'</b></span></div>';next.classList.remove("hidden")}
+function next(){if(S.pos>=11){question.textContent="🏆 Missão concluída!";meta.innerHTML='<span class="badge">NASA COMPLETA</span>';document.querySelector(".choices").innerHTML="";feedback.innerHTML='<div class="explain"><b>12 questões concluídas.</b><br>Abra o painel para ver os temas que precisam de reforço.</div>';next.classList.add("hidden");qprogress.style.width="100%";return}S.pos++;renderQ()}
+function renderDash(){let d={};Q.forEach((q,i)=>{d[q[0]]??={c:0,e:0};let h=S.hist[i];if(h){d[q[0]].c+=h.c;d[q[0]].e+=h.e}});topics.innerHTML=Object.entries(d).sort((a,b)=>(b[1].e-b[1].c)-(a[1].e-a[1].c)).map(([t,x])=>{let a=x.c+x.e,p=a?Math.round(x.c/a*100):0;return '<div class="topic"><div><b>'+t+'</b><div class="small muted">'+a+' respostas • '+p+'% de acerto</div></div><div class="bar"><i style="width:'+p+'%"></i></div></div>'}).join("")}
+function renderBank(){bankList.innerHTML=Q.map((q,i)=>'<div class="topic"><div><span class="badge author">AUTORAL</span> <b>'+q[0]+'</b><div class="small">'+q[1]+'</div><div class="small muted">Gabarito: '+q[2]+'</div></div></div>').join("")}
+function resetData(){if(confirm("Zerar o histórico deste aparelho?")){localStorage.removeItem("nasaINSS");location.reload()}}
+stats();
 </script>
-<script src="push-client.js"></script>
-<script>
-function requestNotifications(){
-  nasaPushSubscribe();
-}
-</script>
-
-</body>
-</html>
+</body></html>
